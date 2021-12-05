@@ -25,7 +25,7 @@ export type ConditionIncludes =
   | 'Or'
   | 'And'
 
-export type FieldValue =
+export type FieldTypes =
   | string
   | string[]
   | number
@@ -36,7 +36,7 @@ export type FieldValue =
 export type Conditions = {
   target: string
   state: ConditionIncludes
-  value: FieldValue
+  value: FieldTypes
 }
 
 export type FieldType = {
