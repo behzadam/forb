@@ -8,7 +8,9 @@ export enum ConditionState {
   GreaterThan = 'Greater Than',
   LessThan = 'Less Than',
   Contains = 'Contains',
-  DoesNotContain = 'Does Not Contain'
+  DoesNotContain = 'Does Not Contain',
+  Or = 'Or',
+  And = 'And'
 }
 
 export type ConditionIncludes =
@@ -20,6 +22,8 @@ export type ConditionIncludes =
   | 'Less Than'
   | 'Contains'
   | 'Does Not Contain'
+  | 'Or'
+  | 'And'
 
 export type FieldValue =
   | string
