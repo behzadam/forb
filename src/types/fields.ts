@@ -1,31 +1,29 @@
 export type FieldValues = Record<string, any>
 
 export enum Condition {
-  FilledOut = 'Filled Out',
-  NotFilledOut = 'Not Filled Out',
-  EqualTo = 'Equal To',
-  NotEqualTo = 'Not Equal To',
-  GreaterThan = 'Greater Than',
-  LessThan = 'Less Than',
+  IsEmpty = 'Is Empty',
+  IsNotEmpty = 'Is Not Empty',
   Contains = 'Contains',
-  DoesNotContain = 'Does Not Contain',
-  Or = 'Or',
-  And = 'And'
+  IsNotContaining = 'Is Not Containing',
+  Or = '|',
+  And = '&',
+  EqualTo = '=',
+  NotEqualTo = '<>',
+  GreaterThan = '>',
+  GreaterThanOrEquals = '>=',
+  LessThan = '<',
+  LessThanOrEquals = '<='
 }
 
-export type ConditionState =
-  | 'Filled Out'
-  | 'Not Filled Out'
-  | 'Equal To'
-  | 'Not Equal To'
-  | 'Greater Than'
-  | 'Less Than'
-  | 'Contains'
-  | 'Does Not Contain'
-  | 'Or'
-  | 'And'
+export enum Action {
+  Show = 'Show',
+  Hide = 'Hide',
+  JumpTo = 'Jump To'
+}
 
-export type FieldTypes =
+export type ActionsState = 'Show' | 'Hide' | 'Jump To'
+
+export type FieldValueType =
   | string
   | string[]
   | number
@@ -35,15 +33,15 @@ export type FieldTypes =
 
 export type Conditions = {
   target: string
-  state: ConditionState
-  value: FieldTypes
+  state: string
+  value: FieldValueType
 }
 
 export type FieldType = {
   uid: string
   label: string
   type: string
-  value: any
+  value: FieldValueType
   conditions?: Conditions
   onChange(uid: string, value: string): void
 }

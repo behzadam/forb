@@ -15,12 +15,12 @@ export const formData = [
     conditions: [
       {
         target: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
-        state: 'Equal To',
+        state: '=',
         value: '021'
       },
       {
         target: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
-        state: 'Or',
+        state: '|',
         value: '041'
       }
     ]
