@@ -1,6 +1,6 @@
 export type FieldValues = Record<string, any>
 
-export enum ConditionState {
+export enum Condition {
   FilledOut = 'Filled Out',
   NotFilledOut = 'Not Filled Out',
   EqualTo = 'Equal To',
@@ -13,7 +13,7 @@ export enum ConditionState {
   And = 'And'
 }
 
-export type ConditionIncludes =
+export type ConditionState =
   | 'Filled Out'
   | 'Not Filled Out'
   | 'Equal To'
@@ -35,7 +35,7 @@ export type FieldTypes =
 
 export type Conditions = {
   target: string
-  state: ConditionIncludes
+  state: ConditionState
   value: FieldTypes
 }
 
