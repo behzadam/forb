@@ -1,27 +1,27 @@
 export type FieldValues = Record<string, any>
 
 export enum Condition {
-  IsEmpty = 'Is Empty',
-  IsNotEmpty = 'Is Not Empty',
+  IsEmpty = 'IsEmpty',
+  IsNotEmpty = 'IsNotEmpty',
   Contains = 'Contains',
-  IsNotContaining = 'Is Not Containing',
-  Or = '|',
-  And = '&',
-  EqualTo = '=',
-  NotEqualTo = '<>',
-  GreaterThan = '>',
-  GreaterThanOrEquals = '>=',
-  LessThan = '<',
-  LessThanOrEquals = '<='
+  IsNotContaining = 'IsNotContaining',
+  Or = 'Or',
+  And = 'And',
+  EqualTo = 'EqualTo',
+  NotEqualTo = 'NotEqualTo',
+  GreaterThan = 'GreaterThan',
+  GreaterThanOrEquals = 'GreaterThanOrEquals',
+  LessThan = 'LessThan',
+  LessThanOrEquals = 'LessThanOrEquals'
 }
 
 export enum Action {
   Show = 'Show',
   Hide = 'Hide',
-  JumpTo = 'Jump To'
+  JumpTo = 'JumpTo'
 }
 
-export type ActionsState = 'Show' | 'Hide' | 'Jump To'
+export type ActionsState = 'Show' | 'Hide' | 'JumpTo'
 
 export type FieldValueType =
   | string
