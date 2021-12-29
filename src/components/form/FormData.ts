@@ -4,7 +4,7 @@ export const formData = [
     label: 'Phone',
     type: 'number',
     uid: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
-    value: '1'
+    value: '1',
   },
   {
     component: 'text',
@@ -16,13 +16,13 @@ export const formData = [
       {
         target: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
         state: '=',
-        value: '021'
+        value: '021',
       },
       {
         target: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
         state: '|',
-        value: '041'
-      }
-    ]
-  }
-]
+        value: '041',
+      },
+    ],
+  },
+];

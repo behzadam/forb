@@ -1,14 +1,15 @@
-import { ReactElement } from 'react'
-import { FieldType } from '../types'
+import { ReactElement } from 'react';
 
-type FieldProps = FieldType
+import { FieldType } from '../../types';
+
+type FieldProps = FieldType;
 
 const Field = ({
   uid,
   label,
   type,
   value,
-  onChange
+  onChange,
 }: FieldProps): ReactElement => {
   return (
     <div key={uid}>
@@ -17,13 +18,13 @@ const Field = ({
         type={type}
         id={uid}
         name={uid}
-        value={value ?? ''}
+        value={value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          onChange(uid, e.target.value)
+          onChange(uid, e.target.value);
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Field
+export default Field;

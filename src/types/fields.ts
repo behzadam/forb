@@ -1,4 +1,4 @@
-export type FieldValues = Record<string, any>
+export type FieldValues = Record<string, any>;
 
 export enum Condition {
   IsEmpty = 'IsEmpty',
@@ -12,36 +12,34 @@ export enum Condition {
   GreaterThan = 'GreaterThan',
   GreaterThanOrEquals = 'GreaterThanOrEquals',
   LessThan = 'LessThan',
-  LessThanOrEquals = 'LessThanOrEquals'
+  LessThanOrEquals = 'LessThanOrEquals',
 }
 
 export enum Action {
   Show = 'Show',
   Hide = 'Hide',
-  JumpTo = 'JumpTo'
+  JumpTo = 'JumpTo',
 }
 
-export type ActionsState = 'Show' | 'Hide' | 'JumpTo'
+export type ActionsState = 'Show' | 'Hide' | 'JumpTo';
 
 export type FieldValueType =
   | string
-  | string[]
+  | ReadonlyArray<string>
   | number
-  | number[]
-  | boolean
-  | boolean[]
+  | undefined;
 
 export type Conditions = {
-  target: string
-  state: string
-  value: FieldValueType
-}
+  target: string;
+  state: string;
+  value: FieldValueType;
+};
 
 export type FieldType = {
-  uid: string
-  label: string
-  type: string
-  value: FieldValueType
-  conditions?: Conditions
-  onChange(uid: string, value: string): void
-}
+  uid: string;
+  label: string;
+  type: string;
+  value: FieldValueType;
+  conditions?: Conditions;
+  onChange(uid: string, value: string): void;
+};
