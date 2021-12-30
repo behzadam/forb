@@ -2,15 +2,13 @@ import { ReactElement } from 'react';
 
 import { FieldType } from '../../types';
 
-type FieldProps = FieldType;
-
 const Field = ({
   uid,
   label,
   type,
   value,
   onChange,
-}: FieldProps): ReactElement => {
+}: FieldType): ReactElement => {
   return (
     <div key={uid}>
       <label htmlFor={uid}>{label}</label>
