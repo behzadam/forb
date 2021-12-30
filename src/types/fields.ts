@@ -20,6 +20,7 @@ export enum ActionsType {
 }
 
 export type FieldValues = Record<string, any>;
+
 export type FieldValueType =
   | string
   | ReadonlyArray<string>
@@ -37,6 +38,6 @@ export type FieldType = {
   label: string;
   type: string;
   value: FieldValueType;
-  conditions?: Conditions;
+  conditions?: Conditions[] | [];
   onChange(uid: string, value: string): void;
 };
