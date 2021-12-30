@@ -1,28 +1,25 @@
+export enum ConditionsType {
+  IsEmpty,
+  IsNotEmpty,
+  Contains,
+  IsNotContaining,
+  Or,
+  And,
+  EqualTo,
+  NotEqualTo,
+  GreaterThan,
+  GreaterThanOrEquals,
+  LessThan,
+  LessThanOrEquals,
+}
+
+export enum ActionsType {
+  Show,
+  Hide,
+  JumpTo,
+}
+
 export type FieldValues = Record<string, any>;
-
-export enum Condition {
-  IsEmpty = 'IsEmpty',
-  IsNotEmpty = 'IsNotEmpty',
-  Contains = 'Contains',
-  IsNotContaining = 'IsNotContaining',
-  Or = 'Or',
-  And = 'And',
-  EqualTo = 'EqualTo',
-  NotEqualTo = 'NotEqualTo',
-  GreaterThan = 'GreaterThan',
-  GreaterThanOrEquals = 'GreaterThanOrEquals',
-  LessThan = 'LessThan',
-  LessThanOrEquals = 'LessThanOrEquals',
-}
-
-export enum Action {
-  Show = 'Show',
-  Hide = 'Hide',
-  JumpTo = 'JumpTo',
-}
-
-export type ActionsState = 'Show' | 'Hide' | 'JumpTo';
-
 export type FieldValueType =
   | string
   | ReadonlyArray<string>
