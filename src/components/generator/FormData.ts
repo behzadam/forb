@@ -16,11 +16,6 @@ export const formData = [
         state: 'EqualTo',
         value: 2,
       },
-      {
-        target: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
-        state: 'GreaterThanOrEquals',
-        value: 4,
-      },
     ],
   },
 ];

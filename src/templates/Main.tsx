@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
-import { formData } from '../components/form/FormData';
-import FormGenerator from '../components/form/FormGenerator';
+import { formData } from '../components/generator/FormData';
+import FormGenerator from '../components/generator/FormGenerator';
 
 type IMainProps = {
   meta: ReactNode;
