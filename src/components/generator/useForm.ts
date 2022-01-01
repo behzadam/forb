@@ -12,14 +12,11 @@ const checkCondition = (target: any, value: any, state: string): boolean => {
 
 const useForm = (formData: any[]) => {
   const [fields] = useState<any[]>(formData);
-  const [values, setValues] = useState<FieldValues>({});
+  const [initialValues, setInitialValues] = useState<FieldValues>({});
 
-  useEffect(() => {
-    console.log('useEffect', fields, values);
-  }, [fields, values]);
-
-  const fieldChanged = (uid: string, value: string) => {
-    setValues({ ...values, [uid]: value });
+  const fieldChanged = (uid: string, value: any) => {
+    console.log('fieldChanged', uid, value);
+    setInitialValues({ ...initialValues, [uid]: value });
   };
 
   const fieldMeetsCondition =
@@ -34,17 +31,27 @@ const useForm = (formData: any[]) => {
       return true;
     };
 
-  const onSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const onSubmit = (values: any, _: any) => {
     // todo - send data somewhere
+    console.log(values);
   };
 
-  return { fields, values, fieldChanged, fieldMeetsCondition, onSubmit };
+  useEffect(() => {
+    setInitialValues(() => {
+      console.log('fields', fields);
+      return fields.reduce((result: FieldValues, field: FieldType) => {
+        return { ...result, [field.uid]: field.value ?? '' };
+      }, {});
+    });
+    console.log('mounted', initialValues);
+  }, [fields]);
+
+  return { fields, initialValues, fieldChanged, onSubmit };
 };
 
 export default useForm;
 
-// TODO: implement setValues
+// todo: implement setValues
 /** 
 if (field.type === 'field_group') {
   for (const subField of field.fields) {

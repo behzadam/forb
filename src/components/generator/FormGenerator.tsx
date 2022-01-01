@@ -1,6 +1,8 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 
-import Field from './Field';
+import { Formik, Field, Form, FormikHelpers } from 'formik';
+
+import { FieldType } from '../../types';
 import useForm from './useForm';
 
 type FormProps = {
@@ -8,23 +10,40 @@ type FormProps = {
 };
 
 const FormGenerator = ({ formData }: FormProps): ReactElement => {
-  const { fields, values, fieldMeetsCondition, fieldChanged, onSubmit } =
-    useForm(formData);
+  const { fields, initialValues, fieldChanged, onSubmit } = useForm(formData);
+
   return (
-    <form onSubmit={onSubmit}>
-      {fields.filter(fieldMeetsCondition(values)).map((field: any) => {
-        return (
-          <Field
-            key={field.uid}
-            value={values[field.uid]}
-            label={field.label}
-            type={field.type}
-            uid={field.uid}
-            onChange={fieldChanged}
-          />
-        );
-      })}
-    </form>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={(
+        values: typeof initialValues,
+        { setSubmitting }: FormikHelpers<typeof initialValues>
+      ) => {
+        setTimeout(() => {
+          alert(JSON.stringify(values, null, 2));
+          setSubmitting(false);
+        }, 500);
+      }}
+    >
+      <Form>
+        {fields.map((field: FieldType) => {
+          return (
+            <Field
+              key={field.uid}
+              type={field.type}
+              name={field.uid}
+              id={field.uid}
+              value={initialValues[field.uid] ?? ''}
+              className="block mt-4 border border-gray-500"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                fieldChanged(field.uid, e.target.value);
+              }}
+            />
+          );
+        })}
+        <button type="submit">Submit</button>
+      </Form>
+    </Formik>
   );
 };
 
