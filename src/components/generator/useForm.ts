@@ -12,41 +12,40 @@ const checkCondition = (target: any, value: any, state: string): boolean => {
 
 const useForm = (formData: any[]) => {
   const [fields] = useState<any[]>(formData);
-  const [initialValues, setInitialValues] = useState<FieldValues>({});
+  const [formValues, setFormValues] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const fieldChanged = (uid: string, value: any) => {
-    console.log('fieldChanged', uid, value);
-    setInitialValues({ ...initialValues, [uid]: value });
+    setFormValues({ ...formValues, [uid]: value });
   };
 
   const fieldMeetsCondition =
-    (formValues: FieldValues) =>
+    (values: FieldValues) =>
     (field: FieldType): boolean => {
       if (field.conditions) {
         field.conditions.forEach((condition) => {
-          const target = formValues[condition.target];
+          const target = values[condition.target];
           return checkCondition(target, condition.value, condition.state);
         });
       }
       return true;
     };
 
-  const onSubmit = (values: any, _: any) => {
+  const onSubmit = async (values: {}) => {
     // todo - send data somewhere
-    console.log(values);
+    await console.log(values);
   };
 
   useEffect(() => {
-    setInitialValues(() => {
-      console.log('fields', fields);
-      return fields.reduce((result: FieldValues, field: FieldType) => {
+    setFormValues(() => {
+      return fields.reduce((result, field: FieldType) => {
         return { ...result, [field.uid]: field.value ?? '' };
       }, {});
     });
-    console.log('mounted', initialValues);
-  }, [fields]);
+    setIsLoading(false);
+  }, [formData]);
 
-  return { fields, initialValues, fieldChanged, onSubmit };
+  return { fields, formValues, isLoading, fieldChanged, onSubmit };
 };
 
 export default useForm;
@@ -64,12 +63,4 @@ if (field.type === 'field_group') {
 } else {
   obj[field.uid] = field?.value ?? '';
 }
-
-setValues(() => {
-  const newValues = fields.reduce((obj: FieldValues, field: any) => {
-    obj[field.uid] = field.value;
-    return obj;
-  }, {});
-  return { ...values, ...newValues };
-});
 */
