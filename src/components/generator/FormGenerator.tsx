@@ -34,7 +34,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                     type={field.type}
                     name={field.uid}
                     id={field.uid}
-                    className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                    className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                       fieldChanged(field.uid, e.target.value);
                     }}
@@ -43,7 +43,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
               );
             })}
             <button
-              type="button"
+              type="submit"
               className="text-white bg-indigo-600 focus:ring-4 focus:ring-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
             >
               Submit
