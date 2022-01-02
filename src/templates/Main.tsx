@@ -1,18 +1,14 @@
 import { ReactNode } from 'react';
 
-import { formData } from '../components/generator/FormData';
-import FormGenerator from '../components/generator/FormGenerator';
-
 type IMainProps = {
   meta: ReactNode;
   children: ReactNode;
 };
 
 const Main = (props: IMainProps) => (
-  <div className="w-full px-1 antialiased text-gray-700">
+  <div className="w-full min-h-screen px-1 antialiased text-gray-700 bg-gray-50">
     {props.meta}
-    Hello Forb 2
-    <FormGenerator formData={formData} />
+    <div className="py-5 text-xl content">{props.children}</div>
   </div>
 );
 

@@ -1,3 +1,5 @@
+import { formData } from '../components/generator/FormData';
+import FormGenerator from '../components/generator/FormGenerator';
 import { Meta } from '../layout/Meta';
 import { Main } from '../templates/Main';
 
@@ -11,7 +13,7 @@ const Index = () => {
         />
       }
     >
-      <h2>Hello</h2>
+      <FormGenerator formData={formData} />
     </Main>
   );
 };
