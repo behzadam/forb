@@ -38,6 +38,6 @@ export type FieldType = {
   label: string;
   type: string;
   value: FieldValueType;
-  conditions?: Conditions[] | [];
+  conditions?: Conditions[];
   onChange(uid: string, value: string): void;
 };

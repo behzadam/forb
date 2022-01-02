@@ -12,39 +12,45 @@ const checkCondition = (target: any, value: any, state: string): boolean => {
 
 const useForm = (formData: any[]) => {
   const [fields] = useState<any[]>(formData);
-  const [values, setValues] = useState<FieldValues>({});
+  const [formValues, setFormValues] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    console.log('useEffect', fields, values);
-  }, [fields, values]);
-
-  const fieldChanged = (uid: string, value: string) => {
-    setValues({ ...values, [uid]: value });
+  const fieldChanged = (uid: string, value: any) => {
+    setFormValues({ ...formValues, [uid]: value });
   };
 
   const fieldMeetsCondition =
-    (formValues: FieldValues) =>
+    (values: FieldValues) =>
     (field: FieldType): boolean => {
       if (field.conditions) {
         field.conditions.forEach((condition) => {
-          const target = formValues[condition.target];
+          const target = values[condition.target];
           return checkCondition(target, condition.value, condition.state);
         });
       }
       return true;
     };
 
-  const onSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
+  const onSubmit = async (values: {}) => {
     // todo - send data somewhere
+    await console.log(values);
   };
 
-  return { fields, values, fieldChanged, fieldMeetsCondition, onSubmit };
+  useEffect(() => {
+    setFormValues(() => {
+      return fields.reduce((result, field: FieldType) => {
+        return { ...result, [field.uid]: field.value ?? '' };
+      }, {});
+    });
+    setIsLoading(false);
+  }, [formData]);
+
+  return { fields, formValues, isLoading, fieldChanged, onSubmit };
 };
 
 export default useForm;
 
-// TODO: implement setValues
+// todo: implement setValues
 /** 
 if (field.type === 'field_group') {
   for (const subField of field.fields) {
@@ -57,12 +63,4 @@ if (field.type === 'field_group') {
 } else {
   obj[field.uid] = field?.value ?? '';
 }
-
-setValues(() => {
-  const newValues = fields.reduce((obj: FieldValues, field: any) => {
-    obj[field.uid] = field.value;
-    return obj;
-  }, {});
-  return { ...values, ...newValues };
-});
 */
