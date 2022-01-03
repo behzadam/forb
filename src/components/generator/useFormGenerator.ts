@@ -1,22 +1,52 @@
 import { useState, useEffect } from 'react';
 
-import { FieldValues, FieldType, Conditions } from '../../types';
+import {
+  FieldValues,
+  FieldType,
+  Conditions,
+  ConditionsType,
+  ConditionType,
+} from '../../types';
+
+const checkCondition = (
+  state: string,
+  target: string,
+  dest: string
+): boolean => {
+  switch (state) {
+    case ConditionsType.EqualTo:
+      return target === dest;
+      break;
+    default:
+      break;
+  }
+  return true;
+};
 
 const fieldMeetsCondition =
   (values: FieldValues) =>
   (field: FieldType): boolean => {
-    if (field.conditions) {
-      const matches = field.conditions.reduce((_, condition: Conditions) => {
-        const targetValue = values[condition.when];
-        return JSON.stringify(condition.value) === targetValue;
-      }, false);
-      console.log('matches', matches);
-      return matches;
+    if (field.logic) {
+      const matches = field.logic.conditions.reduce(
+        (result: boolean[], condition: Conditions) => {
+          const targetValue = values[condition.when];
+          const destValue = JSON.stringify(condition.value);
+          return [
+            ...result,
+            checkCondition(condition.is, targetValue, destValue),
+          ];
+        },
+        []
+      );
+      return field.condition === ConditionType.All
+        ? matches.every((item) => item === true)
+        : matches.some((item) => item === true);
     }
+    // show all fields by default
     return true;
   };
 
-const useForm = (formData: any[]) => {
+const useFormGenerator = (formData: any[]) => {
   const [fields, setFields] = useState<any[]>(formData);
   const [formValues, setFormValues] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +80,7 @@ const useForm = (formData: any[]) => {
   return { fields, formValues, isLoading, fieldChanged, onSubmit };
 };
 
-export default useForm;
+export default useFormGenerator;
 
 // todo: implement setValues
 /** 

@@ -4,7 +4,7 @@ import { Formik, Field, Form } from 'formik';
 
 import { FieldType } from '../../types';
 import Spinner from '../ui/Spinner';
-import useForm from './useForm';
+import useFormGenerator from './useFormGenerator';
 
 type FormProps = {
   formData: any[];
@@ -12,7 +12,7 @@ type FormProps = {
 
 const FormGenerator = ({ formData }: FormProps): ReactElement => {
   const { fields, formValues, isLoading, fieldChanged, onSubmit } =
-    useForm(formData);
+    useFormGenerator(formData);
 
   if (isLoading) return <Spinner />;
   return (
