@@ -27,7 +27,7 @@ const fieldMeetsCondition =
   (values: FieldValues) =>
   (field: FieldType): boolean => {
     if (field.logic) {
-      const matches = field.logic.conditions.reduce(
+      const conditions = field.logic.conditions.reduce(
         (result: boolean[], condition: Conditions) => {
           const targetValue = values[condition.when];
           const destValue = JSON.stringify(condition.value);
@@ -38,9 +38,15 @@ const fieldMeetsCondition =
         },
         []
       );
-      return field.condition === ConditionType.All
-        ? matches.every((item) => item === true)
-        : matches.some((item) => item === true);
+
+      switch (field.logic.if) {
+        case ConditionType.All:
+          return conditions.every((item) => item === true);
+        case ConditionType.One:
+          return conditions.some((item) => item === true);
+        default:
+          break;
+      }
     }
     // show all fields by default
     return true;
