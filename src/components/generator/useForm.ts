@@ -1,35 +1,29 @@
 import { useState, useEffect } from 'react';
 
-import { FieldValues, FieldType } from '../../types';
+import { FieldValues, FieldType, Conditions } from '../../types';
 
-const checkCondition = (target: any, value: any, state: string): boolean => {
-  console.info(target, value, state);
-  if (state === 'EqualTo') {
+const fieldMeetsCondition =
+  (values: FieldValues) =>
+  (field: FieldType): boolean => {
+    if (field.conditions) {
+      const matches = field.conditions.reduce((_, condition: Conditions) => {
+        const targetValue = values[condition.when];
+        return JSON.stringify(condition.value) === targetValue;
+      }, false);
+      console.log('matches', matches);
+      return matches;
+    }
     return true;
-  }
-  return false;
-};
+  };
 
 const useForm = (formData: any[]) => {
-  const [fields] = useState<any[]>(formData);
+  const [fields, setFields] = useState<any[]>(formData);
   const [formValues, setFormValues] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
   const fieldChanged = (uid: string, value: any) => {
     setFormValues({ ...formValues, [uid]: value });
   };
-
-  const fieldMeetsCondition =
-    (values: FieldValues) =>
-    (field: FieldType): boolean => {
-      if (field.conditions) {
-        field.conditions.forEach((condition) => {
-          const target = values[condition.target];
-          return checkCondition(target, condition.value, condition.state);
-        });
-      }
-      return true;
-    };
 
   const onSubmit = async (values: {}) => {
     // todo - send data somewhere
@@ -44,6 +38,14 @@ const useForm = (formData: any[]) => {
     });
     setIsLoading(false);
   }, [formData]);
+
+  useEffect(() => {
+    setFields(formData.filter(fieldMeetsCondition(formValues)));
+  }, [formValues]);
+
+  useEffect(() => {
+    console.log(fields);
+  }, [fields]);
 
   return { fields, formValues, isLoading, fieldChanged, onSubmit };
 };
@@ -63,4 +65,16 @@ if (field.type === 'field_group') {
 } else {
   obj[field.uid] = field?.value ?? '';
 }
+
+
+      if (field.condition) {
+        switch (field.condition) {
+          case ConditionType.All:
+            return states.every((state) => state === true);
+          case ConditionType.One:
+            return states.some((state) => state === true);
+          default:
+            return false;
+        }
+      }
 */
