@@ -1,43 +1,46 @@
 export enum ConditionsType {
-  IsEmpty,
-  IsNotEmpty,
-  Contains,
-  IsNotContaining,
-  Or,
-  And,
-  EqualTo,
-  NotEqualTo,
-  GreaterThan,
-  GreaterThanOrEquals,
-  LessThan,
-  LessThanOrEquals,
+  IsEmpty = 'IsEmpty',
+  IsNotEmpty = 'IsNotEmpty',
+  Contains = 'Contains',
+  IsNotContaining = 'IsNotContaining',
+  Or = 'Or',
+  And = 'And',
+  EqualTo = 'EqualTo',
+  NotEqualTo = 'NotEqualTo',
+  GreaterThan = 'GreaterThan',
+  GreaterThanOrEquals = 'GreaterThanOrEquals',
+  LessThan = 'LessThan',
+  LessThanOrEquals = 'LessThanOrEquals',
+}
+
+export type Conditions = {
+  when: string;
+  is: string;
+  value: any;
+};
+
+export enum ConditionType {
+  All = 'All',
+  One = 'One',
 }
 
 export enum ActionsType {
-  Show,
-  Hide,
-  JumpTo,
+  Show = 'Show',
+  Hide = 'Hide',
+  JumpTo = 'JumpTo',
 }
 
 export type FieldValues = Record<string, any>;
-
-export type FieldValueType =
-  | string
-  | ReadonlyArray<string>
-  | number
-  | undefined;
-
-export type Conditions = {
-  target: string;
-  state: string;
-  value: FieldValueType;
-};
 
 export type FieldType = {
   uid: string;
   label: string;
   type: string;
-  value: FieldValueType;
-  conditions?: Conditions[];
+  value: any;
+  condition?: string;
+  logic?: {
+    if: string;
+    conditions: Conditions[];
+  };
   onChange(uid: string, value: string): void;
 };
