@@ -38,6 +38,9 @@ export type FieldType = {
   type: string;
   value: any;
   condition?: string;
-  conditions?: Conditions[];
+  logic?: {
+    if: string;
+    conditions: Conditions[];
+  };
   onChange(uid: string, value: string): void;
 };
