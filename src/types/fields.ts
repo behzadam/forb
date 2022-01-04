@@ -3,8 +3,6 @@ export enum ConditionsType {
   IsNotEmpty = 'IsNotEmpty',
   Contains = 'Contains',
   IsNotContaining = 'IsNotContaining',
-  Or = 'Or',
-  And = 'And',
   EqualTo = 'EqualTo',
   NotEqualTo = 'NotEqualTo',
   GreaterThan = 'GreaterThan',
