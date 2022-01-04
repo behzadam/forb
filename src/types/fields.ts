@@ -19,7 +19,7 @@ export type Conditions = {
 
 export enum ConditionType {
   All = 'All',
-  One = 'One',
+  Any = 'Any',
 }
 
 export enum ActionsType {
