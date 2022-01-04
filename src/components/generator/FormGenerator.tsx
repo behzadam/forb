@@ -30,6 +30,12 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
             {fields.map((field: FieldType) => {
               return (
                 <div className="mb-6" key={field.uid}>
+                  <label
+                    className="block mb-3 text-sm font-semibold"
+                    htmlFor={field.uid}
+                  >
+                    {field.label}
+                  </label>
                   <Field
                     type={field.type}
                     name={field.uid}
