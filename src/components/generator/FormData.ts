@@ -13,7 +13,7 @@ export const formData = [
     uid: 'bd90f44a-d479-49ae-ad66-c2c475daa66b',
     value: null,
     logic: {
-      if: 'One',
+      if: 'Any',
       conditions: [
         {
           when: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
