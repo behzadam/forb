@@ -7,7 +7,15 @@ import {
   ConditionsType,
   ConditionType,
 } from '../../types';
-import { isEmpty } from '../../utils/utils';
+import {
+  isEmpty,
+  isContains,
+  isEqual,
+  isGreaterThan,
+  isGreaterThanOrEquals,
+  isLessThan,
+  isLessThanOrEquals,
+} from '../../utils/utils';
 
 const checkCondition = (
   state: string,
@@ -17,12 +25,28 @@ const checkCondition = (
   switch (state) {
     case ConditionsType.IsEmpty:
       return isEmpty(target);
+    case ConditionsType.IsNotEmpty:
+      return !isEmpty(target);
+    case ConditionsType.Contains:
+      return isContains(target, dest);
+    case ConditionsType.IsNotContaining:
+      return !isContains(target, dest);
     case ConditionsType.EqualTo:
-      return target === dest;
+      return isEqual(target, dest);
+    case ConditionsType.NotEqualTo:
+      return !isEqual(target, dest);
+    case ConditionsType.GreaterThan:
+      return isGreaterThan(target, dest);
+    case ConditionsType.GreaterThanOrEquals:
+      return isGreaterThanOrEquals(target, dest);
+    case ConditionsType.LessThan:
+      return isLessThan(target, dest);
+    case ConditionsType.LessThanOrEquals:
+      return isLessThanOrEquals(target, dest);
     default:
       break;
   }
-  return true;
+  return false;
 };
 
 const fieldMeetsCondition =
@@ -89,30 +113,3 @@ const useFormGenerator = (formData: any[]) => {
 };
 
 export default useFormGenerator;
-
-// todo: implement setValues
-/** 
-if (field.type === 'field_group') {
-  for (const subField of field.fields) {
-    obj[subField.uid] = subField?.value ?? '';
-  }
-} else if (field.type === 'checkboxes') {
-  for (const subField of field.options) {
-    obj[subField.uid] = subField?.checked ?? false;
-  }
-} else {
-  obj[field.uid] = field?.value ?? '';
-}
-
-
-      if (field.condition) {
-        switch (field.condition) {
-          case ConditionType.All:
-            return states.every((state) => state === true);
-          case ConditionType.One:
-            return states.some((state) => state === true);
-          default:
-            return false;
-        }
-      }
-*/
