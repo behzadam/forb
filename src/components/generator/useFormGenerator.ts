@@ -68,7 +68,7 @@ const fieldMeetsCondition =
       switch (field.logic.if) {
         case ConditionType.All:
           return conditions.every((item) => item === true);
-        case ConditionType.One:
+        case ConditionType.Any:
           return conditions.some((item) => item === true);
         default:
           break;
