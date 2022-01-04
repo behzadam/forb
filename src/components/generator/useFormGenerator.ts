@@ -7,6 +7,7 @@ import {
   ConditionsType,
   ConditionType,
 } from '../../types';
+import { isEmpty } from '../../utils/utils';
 
 const checkCondition = (
   state: string,
@@ -14,9 +15,10 @@ const checkCondition = (
   dest: string
 ): boolean => {
   switch (state) {
+    case ConditionsType.IsEmpty:
+      return isEmpty(target);
     case ConditionsType.EqualTo:
       return target === dest;
-      break;
     default:
       break;
   }
