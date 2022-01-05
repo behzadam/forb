@@ -1,6 +1,6 @@
-import { isEmpty } from './utils';
+import { isEmpty } from './operator';
 
-describe('utils', () => {
+describe('operator', () => {
   test('should return true on empty param', () => {
     expect(isEmpty(null)).toBe(true);
     expect(isEmpty(undefined)).toBe(true);
