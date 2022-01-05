@@ -46,7 +46,13 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                               type="radio"
                               name={field.uid}
                               value={option.value}
+                              id={field.uid}
                               className="mr-4"
+                              onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                              ) => {
+                                fieldChanged(field.uid, e.target.value);
+                              }}
                             />
                             {option.label}
                           </label>
