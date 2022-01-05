@@ -7,6 +7,25 @@ export const formData = [
     value: 1,
   },
   {
+    label: 'Options',
+    type: 'options',
+    uid: 'f61233e8-565e-43d0-9c14-7d7f220c6021',
+    options: [
+      {
+        label: 'Option 1',
+        value: 'one',
+        checked: false,
+        uid: '161233e8-565e-43d0-9c14-7d7f220c6010',
+      },
+      {
+        label: 'Option 2',
+        value: 'two',
+        checked: true,
+        uid: '261233e8-565e-43d0-9c14-7d7f220c6010',
+      },
+    ],
+  },
+  {
     label: 'Conditional field',
     type: 'text',
     name: 'name',

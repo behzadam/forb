@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { Formik, Field, Form } from 'formik';
 
-import { FieldType } from '../../types';
+import { FieldType, OptionType } from '../../types';
 import Spinner from '../ui/Spinner';
 import useFormGenerator from './useFormGenerator';
 
@@ -13,6 +13,10 @@ type FormProps = {
 const FormGenerator = ({ formData }: FormProps): ReactElement => {
   const { fields, formValues, isLoading, fieldChanged, onSubmit } =
     useFormGenerator(formData);
+
+  useEffect(() => {
+    console.log(formValues);
+  });
 
   if (isLoading) return <Spinner />;
   return (
@@ -28,19 +32,49 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
         >
           <Form>
             {fields.map((field: FieldType) => {
-              return (
-                <div className="mb-6" key={field.uid}>
-                  <Field
-                    type={field.type}
-                    name={field.uid}
-                    id={field.uid}
-                    className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      fieldChanged(field.uid, e.target.value);
-                    }}
-                  />
-                </div>
-              );
+              switch (field.type) {
+                case 'options':
+                  return (
+                    <div role="group" className="mb-8" key={field.uid}>
+                      {field.options?.map((option: OptionType) => {
+                        return (
+                          <label
+                            className="block mb-2 text-sm font-medium cursor-pointer"
+                            key={option.uid}
+                          >
+                            <Field
+                              type="radio"
+                              name={field.uid}
+                              value={option.value}
+                              className="mr-4"
+                            />
+                            {option.label}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  );
+                default:
+                  return (
+                    <div className="mb-6" key={field.uid}>
+                      <label
+                        className="block mb-3 text-sm font-semibold"
+                        htmlFor={field.uid}
+                      >
+                        {field.label}
+                      </label>
+                      <Field
+                        type={field.type}
+                        name={field.uid}
+                        id={field.uid}
+                        className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          fieldChanged(field.uid, e.target.value);
+                        }}
+                      />
+                    </div>
+                  );
+              }
             })}
             <button
               type="submit"

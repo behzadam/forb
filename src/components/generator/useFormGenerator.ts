@@ -64,7 +64,6 @@ const fieldMeetsCondition =
         },
         []
       );
-
       switch (field.logic.if) {
         case ConditionType.All:
           return conditions.every((item) => item === true);
@@ -95,6 +94,15 @@ const useFormGenerator = (formData: any[]) => {
   useEffect(() => {
     setFormValues(() => {
       return fields.reduce((result, field: FieldType) => {
+        if (field.type === 'options') {
+          let defaultChecked: string = '';
+          field?.options?.forEach((option) => {
+            if (option?.checked) {
+              defaultChecked = option.value;
+            }
+          });
+          return { ...result, [field.uid]: defaultChecked };
+        }
         return { ...result, [field.uid]: field.value ?? '' };
       }, {});
     });
@@ -104,10 +112,6 @@ const useFormGenerator = (formData: any[]) => {
   useEffect(() => {
     setFields(formData.filter(fieldMeetsCondition(formValues)));
   }, [formValues]);
-
-  useEffect(() => {
-    console.log(fields);
-  }, [fields]);
 
   return { fields, formValues, isLoading, fieldChanged, onSubmit };
 };
