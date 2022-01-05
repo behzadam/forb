@@ -15,7 +15,7 @@ import {
   isGreaterThanOrEquals,
   isLessThan,
   isLessThanOrEquals,
-} from '../../utils/utils';
+} from '../../utils/operator';
 
 const checkCondition = (
   state: string,
