@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Formik, Field, Form } from 'formik';
 
@@ -14,9 +14,9 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
   const { fields, formValues, isLoading, fieldChanged, onSubmit } =
     useFormGenerator(formData);
 
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
+  // useEffect(() => {
+  //   console.log(formValues);
+  // }, [formValues]);
 
   if (isLoading) return <Spinner />;
   return (
