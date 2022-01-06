@@ -79,11 +79,23 @@ const fieldMeetsCondition =
 
 const useFormGenerator = (formData: any[]) => {
   const [fields, setFields] = useState<any[]>(formData);
-  const [formValues, setFormValues] = useState({});
+  const [formValues, setFormValues] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(true);
 
   const fieldChanged = (uid: string, value: any) => {
-    setFormValues({ ...formValues, [uid]: value });
+    setFormValues(() => {
+      if (Array.isArray(formValues[uid])) {
+        const list = formValues[uid];
+        if (list.includes(value)) {
+          return {
+            ...formValues,
+            [uid]: list.filter((item: string) => item !== value),
+          };
+        }
+        return { ...formValues, [uid]: [...formValues[uid], value] };
+      }
+      return { ...formValues, [uid]: value };
+    });
   };
 
   const onSubmit = async (values: {}) => {
@@ -102,6 +114,15 @@ const useFormGenerator = (formData: any[]) => {
             }
           });
           return { ...result, [field.uid]: defaultChecked };
+        }
+        if (field.type === 'checkboxes') {
+          let defaultCheckedList: string[] = [];
+          field?.options?.forEach((option) => {
+            if (option?.checked) {
+              defaultCheckedList = [...defaultCheckedList, option.value];
+            }
+          });
+          return { ...result, [field.uid]: defaultCheckedList };
         }
         return { ...result, [field.uid]: field.value ?? '' };
       }, {});

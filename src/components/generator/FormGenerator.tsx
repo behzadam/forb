@@ -16,7 +16,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
 
   useEffect(() => {
     console.log(formValues);
-  });
+  }, [formValues]);
 
   if (isLoading) return <Spinner />;
   return (
@@ -44,6 +44,38 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                           >
                             <Field
                               type="radio"
+                              name={field.uid}
+                              value={option.value}
+                              id={field.uid}
+                              className="mr-4"
+                              onChange={(
+                                e: React.ChangeEvent<HTMLInputElement>
+                              ) => {
+                                fieldChanged(field.uid, e.target.value);
+                              }}
+                            />
+                            {option.label}
+                          </label>
+                        );
+                      })}
+                    </div>
+                  );
+                case 'checkboxes':
+                  return (
+                    <div
+                      role="group"
+                      aria-labelledby="checkbox-group"
+                      className="mb-8"
+                      key={field.uid}
+                    >
+                      {field.options?.map((option: OptionType) => {
+                        return (
+                          <label
+                            className="block mb-2 text-sm font-medium cursor-pointer"
+                            key={option.uid}
+                          >
+                            <Field
+                              type="checkbox"
                               name={field.uid}
                               value={option.value}
                               id={field.uid}

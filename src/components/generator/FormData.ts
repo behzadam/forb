@@ -26,6 +26,25 @@ export const formData = [
     ],
   },
   {
+    label: 'Checkbox Group',
+    type: 'checkboxes',
+    uid: 'ch1233e8-565e-43d0-9c14-7d7f220c6021',
+    options: [
+      {
+        label: 'Checkbox 1',
+        value: 'ch one',
+        checked: true,
+        uid: 'ch1233e8-565e-43d0-9c14-7d7f220c6010',
+      },
+      {
+        label: 'Checkbox 2',
+        value: 'ch two',
+        checked: true,
+        uid: 'ch1233e8-565e-43d0-9c14-7d7f220c6011',
+      },
+    ],
+  },
+  {
     label: 'Conditional field',
     type: 'text',
     name: 'name',
