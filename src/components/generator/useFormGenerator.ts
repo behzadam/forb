@@ -1,53 +1,7 @@
 import { useState, useEffect } from 'react';
 
-import {
-  FieldValues,
-  FieldType,
-  Conditions,
-  ConditionsType,
-  ConditionType,
-} from '../../types';
-import {
-  isEmpty,
-  isContains,
-  isEqual,
-  isGreaterThan,
-  isGreaterThanOrEquals,
-  isLessThan,
-  isLessThanOrEquals,
-} from '../../utils/operator';
-
-const checkCondition = (
-  state: string,
-  target: string,
-  dest: string
-): boolean => {
-  switch (state) {
-    case ConditionsType.IsEmpty:
-      return isEmpty(target);
-    case ConditionsType.IsNotEmpty:
-      return !isEmpty(target);
-    case ConditionsType.Contains:
-      return isContains(target, dest);
-    case ConditionsType.IsNotContaining:
-      return !isContains(target, dest);
-    case ConditionsType.EqualTo:
-      return isEqual(target, dest);
-    case ConditionsType.NotEqualTo:
-      return !isEqual(target, dest);
-    case ConditionsType.GreaterThan:
-      return isGreaterThan(target, dest);
-    case ConditionsType.GreaterThanOrEquals:
-      return isGreaterThanOrEquals(target, dest);
-    case ConditionsType.LessThan:
-      return isLessThan(target, dest);
-    case ConditionsType.LessThanOrEquals:
-      return isLessThanOrEquals(target, dest);
-    default:
-      break;
-  }
-  return false;
-};
+import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
+import { checkCondition } from '../../utils/operator';
 
 const fieldMeetsCondition =
   (values: FieldValues) =>
@@ -56,7 +10,7 @@ const fieldMeetsCondition =
       const conditions = field.logic.conditions.reduce(
         (result: boolean[], condition: Conditions) => {
           const targetValue = values[condition.when];
-          const destValue = JSON.stringify(condition.value);
+          const destValue = condition.value;
           return [
             ...result,
             checkCondition(condition.is, targetValue, destValue),
