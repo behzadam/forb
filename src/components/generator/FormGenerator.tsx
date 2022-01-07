@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react';
 import { Formik, Field, Form } from 'formik';
 
 import { FieldType, OptionType } from '../../types';
+import Button from '../ui/Button';
 import Spinner from '../ui/Spinner';
 import useFormGenerator from './useFormGenerator';
 
@@ -13,10 +14,6 @@ type FormProps = {
 const FormGenerator = ({ formData }: FormProps): ReactElement => {
   const { fields, formValues, isLoading, fieldChanged, onSubmit } =
     useFormGenerator(formData);
-
-  // useEffect(() => {
-  //   console.log(formValues);
-  // }, [formValues]);
 
   if (isLoading) return <Spinner />;
   return (
@@ -114,12 +111,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                   );
               }
             })}
-            <button
-              type="submit"
-              className="text-white bg-indigo-600 focus:ring-4 focus:ring-indigo-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"
-            >
-              Submit
-            </button>
+            <Button type="submit">Submit</Button>
           </Form>
         </Formik>
       </div>
