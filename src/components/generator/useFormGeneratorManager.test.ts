@@ -1,9 +1,9 @@
-import { ConditionsType } from '../types';
-import { isEmpty, checkCondition } from './operator';
+import { ConditionsType } from '../../types';
+import { isEmpty, ifMeetsCondition } from './useFormGeneratorManager';
 
 describe('operator', () => {
   test('should call checkCondition', () => {
-    const result = checkCondition(ConditionsType.EqualTo, '1', '1');
+    const result = ifMeetsCondition(ConditionsType.EqualTo, '1', '1');
     expect(result).toBe(true);
   });
 

@@ -1,33 +1,39 @@
 import { useState, useEffect } from 'react';
 
 import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
-import { checkCondition } from '../../utils/operator';
+import { ifMeetsCondition } from './useFormGeneratorManager';
+
+const ifStatesMeetLogic = (is: string, states: boolean[]): boolean => {
+  switch (is) {
+    case ConditionType.All:
+      return states.every((item) => item === true);
+    case ConditionType.Any:
+      return states.some((item) => item === true);
+    default:
+      break;
+  }
+  return false;
+};
 
 const fieldMeetsCondition =
-  (values: FieldValues) =>
+  (formValues: FieldValues) =>
   (field: FieldType): boolean => {
     if (field.logic) {
-      const conditions = field.logic.conditions.reduce(
+      const states: boolean[] = field.logic.conditions.reduce(
         (result: boolean[], condition: Conditions) => {
-          const targetValue = values[condition.when];
-          const destValue = condition.value;
-          return [
-            ...result,
-            checkCondition(condition.is, targetValue, destValue),
-          ];
+          // gets target value from form values (by uid key)
+          const target = formValues[condition.when];
+          // field value
+          const current = condition.value;
+          // generates an array of boolean: [true, false, ...]
+          return [...result, ifMeetsCondition(condition.is, target, current)];
         },
         []
       );
-      switch (field.logic.if) {
-        case ConditionType.All:
-          return conditions.every((item) => item === true);
-        case ConditionType.Any:
-          return conditions.some((item) => item === true);
-        default:
-          break;
-      }
+      // checks if filds meet logic: All, Any
+      return ifStatesMeetLogic(field.logic.if, states);
     }
-    // show all fields by default
+    // show field by default
     return true;
   };
 
