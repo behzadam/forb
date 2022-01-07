@@ -104,7 +104,12 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                         id={field.uid}
                         className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                          fieldChanged(field.uid, e.target.value);
+                          fieldChanged(
+                            field.uid,
+                            field.type === 'number'
+                              ? Number(e.target.value)
+                              : e.target.value
+                          );
                         }}
                       />
                     </div>
