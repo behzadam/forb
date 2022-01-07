@@ -77,7 +77,7 @@ export const formData = [
       conditions: [
         {
           when: 'ch1233e8-565e-43d0-9c14-7d7f220c6021',
-          is: 'EqualTo',
+          is: 'Contains',
           value: ['ch two'],
         },
       ],
