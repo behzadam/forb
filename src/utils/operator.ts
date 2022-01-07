@@ -43,7 +43,7 @@ export const isLessThanOrEquals = (target: string, dest: string): boolean => {
   return target <= dest;
 };
 
-export const checkCondition = (
+export const ifMeetsCondition = (
   state: string,
   target: string,
   dest: string

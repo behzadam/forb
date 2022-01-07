@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
-import { checkCondition } from '../../utils/operator';
+import { ifMeetsCondition } from '../../utils/operator';
 
 const fieldMeetsCondition =
   (values: FieldValues) =>
@@ -13,7 +13,7 @@ const fieldMeetsCondition =
           const destValue = condition.value;
           return [
             ...result,
-            checkCondition(condition.is, targetValue, destValue),
+            ifMeetsCondition(condition.is, targetValue, destValue),
           ];
         },
         []
