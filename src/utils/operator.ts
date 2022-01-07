@@ -10,57 +10,56 @@ export const isEmpty = (value: any) => {
   );
 };
 
-export const isContains = (target: string, dest: string): boolean => {
-  console.log('isContains', target, dest);
-  return target?.includes(dest);
+export const isContains = (target: string, other: string): boolean => {
+  return target?.includes(other);
 };
 
 // todo: should replace with lodash or another lib
-export const isEquals = (target: string, dest: string): boolean => {
-  return target === dest;
+export const isEquals = (target: string, other: string): boolean => {
+  return target === other;
 };
 
 // todo: should handle other formats
-export const isGreaterThan = (target: string, dest: string): boolean => {
-  return target > dest;
+export const isGreaterThan = (target: string, other: string): boolean => {
+  return target > other;
 };
 
 // todo: should handle other formats
 export const isGreaterThanOrEquals = (
   target: string,
-  dest: string
+  other: string
 ): boolean => {
-  return target >= dest;
+  return target >= other;
 };
 
 // todo: should handle other formats
-export const isLessThan = (target: string, dest: string): boolean => {
-  return target < dest;
+export const isLessThan = (target: string, other: string): boolean => {
+  return target < other;
 };
 
 // todo: should handle other formats
-export const isLessThanOrEquals = (target: string, dest: string): boolean => {
-  return target <= dest;
+export const isLessThanOrEquals = (target: string, other: string): boolean => {
+  return target <= other;
 };
 
 export const ifMeetsCondition = (
-  state: string,
+  operator: string,
   target: string,
-  dest: string
+  other: string
 ): boolean => {
   const operations: Record<string, Function> = {
     [ConditionsType.IsEmpty]: (): boolean => isEmpty(target),
     [ConditionsType.IsNotEmpty]: (): boolean => !isEmpty(target),
-    [ConditionsType.Contains]: (): boolean => isContains(target, dest),
-    [ConditionsType.IsNotContaining]: (): boolean => !isContains(target, dest),
-    [ConditionsType.EqualTo]: (): boolean => isEquals(target, dest),
-    [ConditionsType.NotEqualTo]: (): boolean => !isEquals(target, dest),
-    [ConditionsType.GreaterThan]: (): boolean => isGreaterThan(target, dest),
+    [ConditionsType.Contains]: (): boolean => isContains(target, other),
+    [ConditionsType.IsNotContaining]: (): boolean => !isContains(target, other),
+    [ConditionsType.EqualTo]: (): boolean => isEquals(target, other),
+    [ConditionsType.NotEqualTo]: (): boolean => !isEquals(target, other),
+    [ConditionsType.GreaterThan]: (): boolean => isGreaterThan(target, other),
     [ConditionsType.GreaterThanOrEquals]: (): boolean =>
-      isGreaterThanOrEquals(target, dest),
-    [ConditionsType.LessThan]: (): boolean => isLessThan(target, dest),
+      isGreaterThanOrEquals(target, other),
+    [ConditionsType.LessThan]: (): boolean => isLessThan(target, other),
     [ConditionsType.LessThanOrEquals]: (): boolean =>
-      isLessThanOrEquals(target, dest),
+      isLessThanOrEquals(target, other),
   };
-  return operations[state]?.(target, dest) ?? false;
+  return operations[operator]?.(target, other) ?? false;
 };
