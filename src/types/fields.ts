@@ -1,10 +1,15 @@
 export enum ConditionsType {
-  IsEmpty = 'IsEmpty',
-  IsNotEmpty = 'IsNotEmpty',
-  Contains = 'Contains',
-  IsNotContaining = 'IsNotContaining',
+  // shared
   EqualTo = 'EqualTo',
   NotEqualTo = 'NotEqualTo',
+
+  // text fields
+  IsNotContaining = 'IsNotContaining',
+  Contains = 'Contains',
+  IsEmpty = 'IsEmpty',
+  IsNotEmpty = 'IsNotEmpty',
+
+  // numeric fields
   GreaterThan = 'GreaterThan',
   GreaterThanOrEquals = 'GreaterThanOrEquals',
   LessThan = 'LessThan',
