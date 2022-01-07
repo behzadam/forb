@@ -11,6 +11,7 @@ export const isEmpty = (value: any) => {
 };
 
 export const isContains = (target: string | any[], other: any): boolean => {
+  console.log('isContains', target, other, target.includes(other));
   return target.includes(other);
 };
 

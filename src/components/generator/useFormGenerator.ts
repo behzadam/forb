@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
-import { ifMeetsCondition } from './useFormGeneratorManager';
+import { ifMeetsCondition } from './FormGeneratorManager';
 
 const ifStatesMeetLogic = (is: string, states: boolean[]): boolean => {
   switch (is) {
@@ -25,6 +25,7 @@ const fieldMeetsCondition =
           const target = formValues[condition.when];
           // field value
           const current = condition.value;
+          console.log('ifMeetsCondition', target, current);
           // generates an array of boolean: [true, false, ...]
           return [...result, ifMeetsCondition(condition.is, target, current)];
         },
