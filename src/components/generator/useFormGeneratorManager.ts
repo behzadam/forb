@@ -1,4 +1,4 @@
-import { ConditionsType } from '../types';
+import { ConditionsType } from '../../types';
 
 export const isEmpty = (value: any) => {
   return (

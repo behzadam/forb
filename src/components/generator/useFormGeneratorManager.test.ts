@@ -1,5 +1,5 @@
-import { ConditionsType } from '../types';
-import { isEmpty, ifMeetsCondition } from './operator';
+import { ConditionsType } from '../../types';
+import { isEmpty, ifMeetsCondition } from './useFormGeneratorManager';
 
 describe('operator', () => {
   test('should call checkCondition', () => {
