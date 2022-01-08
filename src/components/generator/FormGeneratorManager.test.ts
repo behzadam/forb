@@ -118,6 +118,13 @@ describe('isGreaterThan', () => {
   });
 });
 
+describe(`${ConditionsType.GreaterThan}`, () => {
+  test(`should check if target is greater than the number`, () => {
+    expect(ifMeetsCondition(ConditionsType.GreaterThan, 4, 2)).toBe(true);
+    expect(ifMeetsCondition(ConditionsType.GreaterThan, 2, 4)).toBe(false);
+  });
+});
+
 describe(`${ConditionsType.IsEmpty}`, () => {
   test('should return true on empty values', () => {
     expect(ifMeetsCondition(ConditionsType.EqualTo, []));
