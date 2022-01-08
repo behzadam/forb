@@ -10,10 +10,14 @@ export const isEmpty = (value: any) => {
   );
 };
 
-export const isContains = (target: string | any[], other: any): boolean => {
-  console.log('isContains', target, other, target.includes(other));
-  return target.includes(other);
-};
+function isContains(target: string[], other: string[]): boolean;
+function isContains(target: string, other: string): boolean;
+function isContains(target: any, other: any): boolean {
+  if (typeof target === 'string') {
+    return target.includes(other);
+  }
+  return target.some((item: string) => other.includes(item));
+}
 
 export const isEquals = (target: any, other: any): boolean => {
   return target === other;
