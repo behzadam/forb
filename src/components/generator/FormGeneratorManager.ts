@@ -1,14 +1,8 @@
 import { ConditionsType } from '../../types';
 
-export const isEmpty = (value: any) => {
-  return (
-    value === null ||
-    value === undefined ||
-    value === '' ||
-    (Array.isArray(value) && value.length === 0) ||
-    (typeof value === 'object' && Object.keys(value).length === 0)
-  );
-};
+function isEmpty(val: any) {
+  return val == null || !(Object.keys(val) || val).length;
+}
 
 function isContains(target: string[], other: string[]): boolean;
 function isContains(target: string, other: string): boolean;
@@ -33,24 +27,21 @@ function isEquals(target: any, other: any): boolean {
   return target === other;
 }
 
-export const isGreaterThan = (target: number, other: number): boolean => {
+function isGreaterThan(target: number, other: number): boolean {
   return target > other;
-};
+}
 
-export const isGreaterThanOrEquals = (
-  target: number,
-  other: number
-): boolean => {
+function isGreaterThanOrEquals(target: number, other: number): boolean {
   return target >= other;
-};
+}
 
-export const isLessThan = (target: number, other: number): boolean => {
+function isLessThan(target: number, other: number): boolean {
   return target < other;
-};
+}
 
-export const isLessThanOrEquals = (target: number, other: number): boolean => {
+function isLessThanOrEquals(target: number, other: number): boolean {
   return target <= other;
-};
+}
 
 export const ifMeetsCondition = (
   operator: string,
