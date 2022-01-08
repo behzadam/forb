@@ -1,18 +1,13 @@
 import { ConditionsType } from '../../types';
 
-export const isEmpty = (value: any) => {
-  return (
-    value === null ||
-    value === undefined ||
-    value === '' ||
-    (Array.isArray(value) && value.length === 0) ||
-    (typeof value === 'object' && Object.keys(value).length === 0)
-  );
-};
+export function isEmpty(val: any) {
+  return val == null || !(Object.keys(val) || val).length;
+}
 
-function isContains(target: string[], other: string[]): boolean;
-function isContains(target: string, other: string): boolean;
-function isContains(target: any, other: any): boolean {
+export function isContains(target: string[], other: string[]): boolean;
+export function isContains(target: string, other: string): boolean;
+export function isContains(target: string, other: string | null): boolean;
+export function isContains(target: any, other: any): boolean {
   if (typeof target === 'string' && typeof other === 'string') {
     return target.includes(other);
   }
@@ -22,10 +17,10 @@ function isContains(target: any, other: any): boolean {
   return false;
 }
 
-function isEquals(target: string, other: string): boolean;
-function isEquals(target: number, other: number): boolean;
-function isEquals(target: boolean, other: boolean): boolean;
-function isEquals(target: any, other: any): boolean {
+export function isEquals(target: string, other: string): boolean;
+export function isEquals(target: number, other: number): boolean;
+export function isEquals(target: boolean, other: boolean): boolean;
+export function isEquals(target: any, other: any): boolean {
   if (typeof target === 'string' && typeof other === 'string') {
     const areEqual: number = target?.localeCompare(other) ?? -1;
     return areEqual === 0;
@@ -33,30 +28,33 @@ function isEquals(target: any, other: any): boolean {
   return target === other;
 }
 
-export const isGreaterThan = (target: number, other: number): boolean => {
+export function isGreaterThan(target: number, other: number): boolean {
   return target > other;
-};
+}
 
-export const isGreaterThanOrEquals = (
-  target: number,
-  other: number
-): boolean => {
+export function isGreaterThanOrEquals(target: number, other: number): boolean {
   return target >= other;
-};
+}
 
-export const isLessThan = (target: number, other: number): boolean => {
+export function isLessThan(target: number, other: number): boolean {
   return target < other;
-};
+}
 
-export const isLessThanOrEquals = (target: number, other: number): boolean => {
+export function isLessThanOrEquals(target: number, other: number): boolean {
   return target <= other;
-};
+}
 
-export const ifMeetsCondition = (
+export function ifMeetsCondition(operator: string, target: any): boolean;
+export function ifMeetsCondition(
   operator: string,
   target: any,
   other: any
-): boolean => {
+): boolean;
+export function ifMeetsCondition(
+  operator: string,
+  target: any,
+  other?: any
+): boolean {
   try {
     const operations: Record<string, Function> = {
       [ConditionsType.IsEmpty]: (): boolean => isEmpty(target),
@@ -77,4 +75,4 @@ export const ifMeetsCondition = (
   } catch (error) {
     return false;
   }
-};
+}
