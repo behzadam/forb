@@ -4,6 +4,7 @@ import {
   isContains,
   isEmpty,
   isEquals,
+  isGreaterThan,
 } from './FormGeneratorManager';
 
 describe('isEmpty', () => {
@@ -107,6 +108,13 @@ describe(`isEquals`, () => {
     const picked = 'سلام';
     const result = isEquals(target, picked);
     expect(result).toBe(false);
+  });
+});
+
+describe('isGreaterThan', () => {
+  test(`should check if target is greater than the number`, () => {
+    expect(isGreaterThan(4, 2)).toBe(true);
+    expect(isGreaterThan(2, 4)).toBe(false);
   });
 });
 
