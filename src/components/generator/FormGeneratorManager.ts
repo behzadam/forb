@@ -19,9 +19,15 @@ function isContains(target: any, other: any): boolean {
   return target.some((item: string) => other.includes(item));
 }
 
-export const isEquals = (target: any, other: any): boolean => {
+function isEquals(target: string, other: string): boolean;
+function isEquals(target: number, other: number): boolean;
+function isEquals(target: string | number, other: string | number): boolean {
+  if (typeof target === 'string' && typeof other === 'string') {
+    const areEqual: number = target?.localeCompare(other) ?? -1;
+    return areEqual === 0;
+  }
   return target === other;
-};
+}
 
 export const isGreaterThan = (target: number, other: number): boolean => {
   return target > other;
