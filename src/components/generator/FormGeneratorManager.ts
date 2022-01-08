@@ -22,6 +22,10 @@ function isContains(target: any, other: any): boolean {
 function isEquals(target: string, other: string): boolean;
 function isEquals(target: number, other: number): boolean;
 function isEquals(target: string | number, other: string | number): boolean {
+  if (typeof target === 'string' && typeof other === 'string') {
+    const areEqual: number = target?.localeCompare(other) ?? -1;
+    return areEqual === 0;
+  }
   return target === other;
 }
 
