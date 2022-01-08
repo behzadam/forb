@@ -13,15 +13,19 @@ export const isEmpty = (value: any) => {
 function isContains(target: string[], other: string[]): boolean;
 function isContains(target: string, other: string): boolean;
 function isContains(target: any, other: any): boolean {
-  if (typeof target === 'string') {
+  if (typeof target === 'string' && typeof other === 'string') {
     return target.includes(other);
   }
-  return target.some((item: string) => other.includes(item));
+  if (Array.isArray(target) && Array.isArray(other)) {
+    return target.some((item: string) => other.includes(item));
+  }
+  return false;
 }
 
 function isEquals(target: string, other: string): boolean;
 function isEquals(target: number, other: number): boolean;
-function isEquals(target: string | number, other: string | number): boolean {
+function isEquals(target: boolean, other: boolean): boolean;
+function isEquals(target: any, other: any): boolean {
   if (typeof target === 'string' && typeof other === 'string') {
     const areEqual: number = target?.localeCompare(other) ?? -1;
     return areEqual === 0;
