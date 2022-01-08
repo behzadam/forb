@@ -71,4 +71,18 @@ describe(`${ConditionsType.EqualTo}`, () => {
     const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
     expect(result).toBe(false);
   });
+
+  test(`should return true if non English strings are equal`, () => {
+    const target = 'سلام';
+    const picked = 'سلام';
+    const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
+    expect(result).toBe(true);
+  });
+
+  test(`should return true if non English strings are not equal`, () => {
+    const target = 'سلام دنیا';
+    const picked = 'سلام';
+    const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
+    expect(result).toBe(false);
+  });
 });
