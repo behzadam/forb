@@ -17,7 +17,7 @@ export function isContains(target: any, other: any): boolean {
   return false;
 }
 
-export function isEquals(target: string, other: string): boolean;
+export function isEquals(target: string, other: string | null): boolean;
 export function isEquals(target: number, other: number): boolean;
 export function isEquals(target: boolean, other: boolean): boolean;
 export function isEquals(target: any, other: any): boolean {
