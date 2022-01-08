@@ -42,3 +42,33 @@ describe(`${ConditionsType.Contains}`, () => {
     expect(result).toBe(false);
   });
 });
+
+describe(`${ConditionsType.EqualTo}`, () => {
+  test(`should return true if strings are eual`, () => {
+    const target = 'hello';
+    const picked = 'hello';
+    const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
+    expect(result).toBe(true);
+  });
+
+  test(`should return false if picked is an empty string`, () => {
+    const target = 'hello';
+    const picked = '';
+    const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
+    expect(result).toBe(false);
+  });
+
+  test(`should return false if picked is null`, () => {
+    const target = 'hello';
+    const picked = null;
+    const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
+    expect(result).toBe(false);
+  });
+
+  test(`should return false if strings are not equal`, () => {
+    const target = 'a';
+    const picked = 'b';
+    const result = ifMeetsCondition(ConditionsType.EqualTo, target, picked);
+    expect(result).toBe(false);
+  });
+});
