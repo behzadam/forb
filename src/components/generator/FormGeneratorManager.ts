@@ -1,48 +1,11 @@
 import { ConditionsType } from '../../types';
-
-export function isEmpty(val: any) {
-  return val == null || !(Object.keys(val) || val).length;
-}
-
-export function isContains(target: string[], other: string[]): boolean;
-export function isContains(target: string, other: string): boolean;
-export function isContains(target: string, other: string | null): boolean;
-export function isContains(target: any, other: any): boolean {
-  if (typeof target === 'string' && typeof other === 'string') {
-    return target.includes(other);
-  }
-  if (Array.isArray(target) && Array.isArray(other)) {
-    return target.some((item: string) => other.includes(item));
-  }
-  return false;
-}
-
-export function isEquals(target: string, other: string | null): boolean;
-export function isEquals(target: number, other: number): boolean;
-export function isEquals(target: boolean, other: boolean): boolean;
-export function isEquals(target: any, other: any): boolean {
-  if (typeof target === 'string' && typeof other === 'string') {
-    const areEqual: number = target?.localeCompare(other) ?? -1;
-    return areEqual === 0;
-  }
-  return target === other;
-}
-
-export function isGreaterThan(target: number, other: number): boolean {
-  return target > other;
-}
-
-export function isGreaterThanOrEquals(target: number, other: number): boolean {
-  return target >= other;
-}
-
-export function isLessThan(target: number, other: number): boolean {
-  return target < other;
-}
-
-export function isLessThanOrEquals(target: number, other: number): boolean {
-  return target <= other;
-}
+import { isContains } from '../../utils/isContains';
+import { isEmpty } from '../../utils/isEmpty';
+import { isEquals } from '../../utils/isEquals';
+import { isGreaterThan } from '../../utils/isGreaterThan';
+import { isGreaterThanOrEquals } from '../../utils/isGreaterThanOrEquals';
+import { isLessThan } from '../../utils/isLessThan';
+import { isLessThanOrEquals } from '../../utils/isLessThanOrEquals';
 
 export function ifMeetsCondition(operator: string, target: any): boolean;
 export function ifMeetsCondition(
