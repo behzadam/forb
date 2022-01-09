@@ -1,6 +1,35 @@
 import { ConditionsType } from '../../types';
 import { ifMeetsCondition } from './FormGeneratorManager';
 
+describe(`${ConditionsType.LessThanOrEquals}`, () => {
+  test(`should check if target is less than the number`, () => {
+    expect(ifMeetsCondition(ConditionsType.LessThanOrEquals, 4, 4)).toBe(true);
+    expect(ifMeetsCondition(ConditionsType.LessThanOrEquals, 2, 3)).toBe(true);
+    expect(ifMeetsCondition(ConditionsType.LessThanOrEquals, 3, 2)).toBe(false);
+  });
+});
+
+describe(`${ConditionsType.LessThan}`, () => {
+  test(`should check if target is less than the number`, () => {
+    expect(ifMeetsCondition(ConditionsType.LessThan, 2, 4)).toBe(true);
+    expect(ifMeetsCondition(ConditionsType.LessThan, 4, 2)).toBe(false);
+  });
+});
+
+describe(`${ConditionsType.GreaterThanOrEquals}`, () => {
+  test(`should check if target is greater than or equal the number`, () => {
+    expect(ifMeetsCondition(ConditionsType.GreaterThanOrEquals, 4, 2)).toBe(
+      true
+    );
+    expect(ifMeetsCondition(ConditionsType.GreaterThanOrEquals, 4, 4)).toBe(
+      true
+    );
+    expect(ifMeetsCondition(ConditionsType.GreaterThanOrEquals, 2, 4)).toBe(
+      false
+    );
+  });
+});
+
 describe(`${ConditionsType.GreaterThan}`, () => {
   test(`should check if target is greater than the number`, () => {
     expect(ifMeetsCondition(ConditionsType.GreaterThan, 4, 2)).toBe(true);
@@ -55,6 +84,26 @@ describe(`${ConditionsType.Contains}`, () => {
 
     const result = ifMeetsCondition(ConditionsType.Contains, target, picked);
     expect(result).toBe(false);
+  });
+});
+
+describe(`${ConditionsType.IsNotContaining}`, () => {
+  test(`should check if target does not contain value ( array )`, () => {
+    const target = ['ch1', 'ch2', 'ch3', 'ch4'];
+    const picked = ['1', '2'];
+
+    expect(
+      ifMeetsCondition(ConditionsType.IsNotContaining, target, picked)
+    ).toBe(true);
+  });
+
+  test(`should check if target does not contain value ( string )`, () => {
+    const target = 'hello';
+    const picked = 'world';
+
+    expect(
+      ifMeetsCondition(ConditionsType.IsNotContaining, target, picked)
+    ).toBe(true);
   });
 });
 
