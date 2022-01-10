@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
+import { addOrRemove } from '../../utils/addOrRemove';
 import { ifMeetsCondition } from './FormGeneratorManager';
 
 const ifStatesMeetLogic = (is: string, states: boolean[]): boolean => {
@@ -25,7 +26,7 @@ const fieldMeetsCondition =
           const target = formValues[condition.when];
           // field value
           const current = condition.value;
-          console.log('ifMeetsCondition', target, current);
+          // console.log('ifMeetsCondition', target, current);
           // generates an array of boolean: [true, false, ...]
           return [...result, ifMeetsCondition(condition.is, target, current)];
         },
@@ -46,14 +47,10 @@ const useFormGenerator = (formData: any[]) => {
   const fieldChanged = (uid: string, value: any) => {
     setFormValues(() => {
       if (Array.isArray(formValues[uid])) {
-        const list = formValues[uid];
-        if (list.includes(value)) {
-          return {
-            ...formValues,
-            [uid]: list.filter((item: string) => item !== value),
-          };
-        }
-        return { ...formValues, [uid]: [...formValues[uid], value] };
+        return {
+          ...formValues,
+          [uid]: addOrRemove(formValues[uid], value),
+        };
       }
       return { ...formValues, [uid]: value };
     });
