@@ -11,6 +11,8 @@
     "strictNullChecks": true,
     "noUncheckedIndexedAccess": true,
 
+    "downlevelIteration": true,
+
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
