@@ -38,12 +38,13 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                           <label
                             className="block mb-2 text-sm font-medium cursor-pointer"
                             key={option.uid}
+                            htmlFor={option.uid}
                           >
                             <Field
                               type="radio"
                               name={field.uid}
                               value={option.value}
-                              id={field.uid}
+                              id={option.uid}
                               className="mr-4"
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
@@ -76,7 +77,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                               type="checkbox"
                               name={field.uid}
                               value={option.value}
-                              id={field.uid}
+                              id={option.uid}
                               className="mr-4"
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
