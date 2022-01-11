@@ -70,6 +70,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                           <label
                             className="block mb-2 text-sm font-medium cursor-pointer"
                             key={option.uid}
+                            htmlFor={option.uid}
                           >
                             <Field
                               type="checkbox"
