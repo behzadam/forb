@@ -4,6 +4,23 @@ import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
 import { addOrRemove } from '../../utils/addOrRemove';
 import { ifMeetsCondition } from './FormGeneratorManager';
 
+const getDefaultValue = (field: FieldType): string | string[] => {
+  // for: checkboxes
+  const defaultSelectedList: string[] = [];
+  // for: input, select, options
+  let defaultSelected = field.value ?? null;
+  field?.options?.forEach((option) => {
+    if (option.checked) {
+      if (field.type === 'checkboxes') {
+        defaultSelectedList.push(option.value);
+      } else {
+        defaultSelected = option.value;
+      }
+    }
+  });
+  return defaultSelected || defaultSelectedList;
+};
+
 const ifStatesMeetLogic = (is: string, states: boolean[]): boolean => {
   switch (is) {
     case ConditionType.All:
@@ -64,25 +81,10 @@ const useFormGenerator = (formData: any[]) => {
   useEffect(() => {
     setFormValues(() => {
       return fields.reduce((result, field: FieldType) => {
-        if (field.type === 'options') {
-          let defaultChecked: string = '';
-          field?.options?.forEach((option) => {
-            if (option?.checked) {
-              defaultChecked = option.value;
-            }
-          });
-          return { ...result, [field.uid]: defaultChecked };
-        }
-        if (field.type === 'checkboxes') {
-          let defaultCheckedList: string[] = [];
-          field?.options?.forEach((option) => {
-            if (option?.checked) {
-              defaultCheckedList = [...defaultCheckedList, option.value];
-            }
-          });
-          return { ...result, [field.uid]: defaultCheckedList };
-        }
-        return { ...result, [field.uid]: field.value ?? '' };
+        return {
+          ...result,
+          [field.uid]: getDefaultValue(field),
+        };
       }, {});
     });
     setIsLoading(false);
