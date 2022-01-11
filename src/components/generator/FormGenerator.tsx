@@ -58,6 +58,26 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                       })}
                     </div>
                   );
+                case 'select':
+                  return (
+                    <Field
+                      as="select"
+                      className="block mb-6 w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
+                      key={field.uid}
+                    >
+                      {field.options?.map((option: OptionType) => {
+                        return (
+                          <option
+                            className="py-4"
+                            key={option.uid}
+                            value={option.value}
+                          >
+                            {option.label}
+                          </option>
+                        );
+                      })}
+                    </Field>
+                  );
                 case 'checkboxes':
                   return (
                     <div
