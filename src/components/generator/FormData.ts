@@ -7,20 +7,40 @@ export const formData = [
     value: 1,
   },
   {
+    label: 'Options',
+    type: 'options',
+    uid: 'op1233e8-565e-43d0-9c14-7d7f220c6021',
+    options: [
+      {
+        label: 'Option 1',
+        value: 'option 1',
+        uid: 'op1233e8-565e-43d0-9c14-7d7f220c6055',
+        checked: false,
+      },
+      {
+        label: 'Option 2',
+        value: 'option 2',
+        uid: 'op1233e8-565e-43d0-9c14-7d7f220c6099',
+        checked: true,
+      },
+    ],
+  },
+  {
     label: 'Select',
     type: 'select',
     uid: 'sl1233e8-565e-43d0-9c14-7d7f220c6021',
-    selected: 'select 1',
     options: [
       {
         label: 'Select 1',
         value: 'select 1',
-        uid: 'sl1233e8-565e-43d0-9c14-7d7f220c6010',
+        uid: 'sl1233e8-565e-43d0-9c14-7d7f220c6055',
+        checked: false,
       },
       {
         label: 'Select 2',
         value: 'select 2',
-        uid: 'sl1233e8-565e-43d0-9c14-7d7f220c6011',
+        uid: 'sl1233e8-565e-43d0-9c14-7d7f220c6099',
+        checked: true,
       },
     ],
   },
