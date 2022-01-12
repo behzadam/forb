@@ -102,4 +102,21 @@ export const formData = [
       ],
     },
   },
+  {
+    label: 'Conditional field based on option',
+    type: 'text',
+    name: 'name 2',
+    uid: 'opt0f44a-d479-49ae-ad66-c2c475daa66b',
+    value: null,
+    logic: {
+      if: 'Any',
+      conditions: [
+        {
+          when: 'op1233e8-565e-43d0-9c14-7d7f220c6021',
+          is: 'EqualTo',
+          value: 'option 1',
+        },
+      ],
+    },
+  },
 ];
