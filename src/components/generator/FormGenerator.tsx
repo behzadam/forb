@@ -32,7 +32,12 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
               switch (field.type) {
                 case 'options':
                   return (
-                    <div role="group" className="mb-8" key={field.uid}>
+                    <div
+                      role="group"
+                      className="mb-8"
+                      data-testid={field.uid}
+                      key={field.uid}
+                    >
                       <label className="block mb-3 text-sm font-semibold">
                         {field.label}
                       </label>

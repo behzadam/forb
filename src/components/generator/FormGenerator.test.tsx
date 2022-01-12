@@ -68,33 +68,72 @@ const formDataWithoutConditions = [
     ],
   },
 ];
-
-const formDataWithConditions = [
-  {
-    label: 'Number',
-    type: 'number',
-    name: 'phone',
-    uid: 'f61233e8',
-    value: 1,
-  },
-  {
-    label: 'Conditional field',
-    type: 'text',
-    name: 'name 2',
-    uid: 'e61233e8',
-    value: null,
-    logic: {
-      if: 'Any',
-      conditions: [
+const formDataWithConditions = {
+  inputField: [
+    {
+      label: 'Number',
+      type: 'number',
+      name: 'phone',
+      uid: 'f61233e8',
+      value: 1,
+    },
+    {
+      label: 'Conditional field',
+      type: 'text',
+      name: 'name 2',
+      uid: 'e61233e8',
+      value: null,
+      logic: {
+        if: 'Any',
+        conditions: [
+          {
+            when: 'f61233e8',
+            is: 'EqualTo',
+            value: 2,
+          },
+        ],
+      },
+    },
+  ],
+  radioOptions: [
+    {
+      label: 'Options',
+      type: 'options',
+      uid: 'op1233e8',
+      options: [
         {
-          when: 'f61233e8',
-          is: 'EqualTo',
-          value: 2,
+          label: 'Option 1',
+          value: 'option 1',
+          uid: 'op1233e1',
+          checked: true,
+        },
+        {
+          label: 'Option 2',
+          value: 'option 2',
+          uid: 'op1233e2',
+          checked: false,
         },
       ],
     },
-  },
-];
+    {
+      label: 'Conditional field',
+      type: 'text',
+      name: 'name 2',
+      uid: 'e61233e8',
+      value: null,
+      logic: {
+        if: 'Any',
+        conditions: [
+          {
+            when: 'op1233e8',
+            is: 'EqualTo',
+            value: 'option 1',
+          },
+        ],
+      },
+    },
+  ],
+};
 
 test('should loads all form components correctly', async () => {
   const { getByText } = render(
@@ -107,13 +146,13 @@ test('should loads all form components correctly', async () => {
   expect(getByText('Checkboxes')).toBeInTheDocument();
 });
 
-test('should render component based on conditions', async () => {
+test('should render component based on conditions (input)', async () => {
   const { getByTestId } = render(
-    <FormGenerator formData={formDataWithConditions} />
+    <FormGenerator formData={formDataWithConditions.inputField} />
   );
 
   const inputNumber = getByTestId('f61233e8');
-  fireEvent.change(inputNumber, { target: { value: 2 } });
+  await fireEvent.change(inputNumber, { target: { value: 2 } });
   expect(inputNumber).toHaveValue(2);
 
   // show
@@ -121,6 +160,23 @@ test('should render component based on conditions', async () => {
   expect(conditionalField).toBeInTheDocument();
 
   // hide
-  fireEvent.change(inputNumber, { target: { value: 1 } });
+  await fireEvent.change(inputNumber, { target: { value: 1 } });
+  expect(conditionalField).not.toBeInTheDocument();
+});
+
+test('should render component based on conditions (options)', async () => {
+  const { getByTestId } = render(
+    <FormGenerator formData={formDataWithConditions.radioOptions} />
+  );
+
+  // show ( by default is visible )
+  const conditionalField = getByTestId('e61233e8');
+  expect(conditionalField).toBeInTheDocument();
+
+  // change radio option
+  const radioOption = getByTestId('op1233e2');
+  await fireEvent.click(radioOption);
+
+  // hide
   expect(conditionalField).not.toBeInTheDocument();
 });
