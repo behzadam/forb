@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 
-import { FieldValues, FieldType, Conditions, ConditionType } from '../../types';
+import { FieldType } from '../../types';
 import { addOrRemove } from '../../utils/addOrRemove';
-import { ifMeetsCondition } from './FormGeneratorManager';
+import { fieldMeetsCondition } from './logic/fieldMeetsCondition';
 
 const getDefaultValue = (field: FieldType): string | string[] => {
   // for: checkboxes
@@ -20,41 +20,6 @@ const getDefaultValue = (field: FieldType): string | string[] => {
   });
   return defaultSelected || defaultSelectedList;
 };
-
-const ifStatesMeetLogic = (is: string, states: boolean[]): boolean => {
-  switch (is) {
-    case ConditionType.All:
-      return states.every((item) => item === true);
-    case ConditionType.Any:
-      return states.some((item) => item === true);
-    default:
-      break;
-  }
-  return false;
-};
-
-const fieldMeetsCondition =
-  (formValues: FieldValues) =>
-  (field: FieldType): boolean => {
-    if (field.logic) {
-      const states: boolean[] = field.logic.conditions.reduce(
-        (result: boolean[], condition: Conditions) => {
-          // gets target value from form values (by uid key)
-          const target = formValues[condition.when];
-          // field value
-          const current = condition.value;
-          // console.log('ifMeetsCondition', target, current);
-          // generates an array of boolean: [true, false, ...]
-          return [...result, ifMeetsCondition(condition.is, target, current)];
-        },
-        []
-      );
-      // checks if filds meet logic: All, Any
-      return ifStatesMeetLogic(field.logic.if, states);
-    }
-    // show field by default
-    return true;
-  };
 
 const useFormGenerator = (formData: any[]) => {
   const [fields, setFields] = useState<any[]>(formData);

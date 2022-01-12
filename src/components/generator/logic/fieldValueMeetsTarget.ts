@@ -1,19 +1,20 @@
-import { ConditionsType } from '../../types';
-import { isContains } from '../../utils/isContains';
-import { isEmpty } from '../../utils/isEmpty';
-import { isEquals } from '../../utils/isEquals';
-import { isGreaterThan } from '../../utils/isGreaterThan';
-import { isGreaterThanOrEquals } from '../../utils/isGreaterThanOrEquals';
-import { isLessThan } from '../../utils/isLessThan';
-import { isLessThanOrEquals } from '../../utils/isLessThanOrEquals';
+import { ConditionsType } from '../../../types';
+import { isContains } from '../../../utils/isContains';
+import { isEmpty } from '../../../utils/isEmpty';
+import { isEquals } from '../../../utils/isEquals';
+import { isGreaterThan } from '../../../utils/isGreaterThan';
+import { isGreaterThanOrEquals } from '../../../utils/isGreaterThanOrEquals';
+import { isLessThan } from '../../../utils/isLessThan';
+import { isLessThanOrEquals } from '../../../utils/isLessThanOrEquals';
 
-export function ifMeetsCondition(operator: string, target: any): boolean;
-export function ifMeetsCondition(
+export function fieldValueMeetsTarget(operator: string, target: any): boolean;
+export function fieldValueMeetsTarget(
   operator: string,
   target: any,
   other: any
 ): boolean;
-export function ifMeetsCondition(
+
+export function fieldValueMeetsTarget(
   operator: string,
   target: any,
   other?: any
