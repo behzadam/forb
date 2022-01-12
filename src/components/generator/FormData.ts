@@ -28,7 +28,7 @@ export const formData = [
   {
     label: 'Select',
     type: 'select',
-    uid: 'sl1233e8-565e-43d0-9c14-7d7f220c6021',
+    uid: 'sl1233e8-565e-43d0-9c14-7d00220c6021',
     options: [
       {
         label: 'Select 1',
