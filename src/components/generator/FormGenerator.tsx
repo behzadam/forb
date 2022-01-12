@@ -33,6 +33,9 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                 case 'options':
                   return (
                     <div role="group" className="mb-8" key={field.uid}>
+                      <label className="block mb-3 text-sm font-semibold">
+                        {field.label}
+                      </label>
                       {field.options?.map((option: OptionType) => {
                         return (
                           <label
@@ -45,6 +48,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                               name={field.uid}
                               value={option.value}
                               id={option.uid}
+                              data-testid={option.uid}
                               className="mr-4"
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
@@ -60,23 +64,28 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                   );
                 case 'select':
                   return (
-                    <Field
-                      as="select"
-                      className="block mb-6 w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
-                      key={field.uid}
-                    >
-                      {field.options?.map((option: OptionType) => {
-                        return (
-                          <option
-                            className="py-4"
-                            key={option.uid}
-                            value={option.value}
-                          >
-                            {option.label}
-                          </option>
-                        );
-                      })}
-                    </Field>
+                    <div role="select" key={field.uid}>
+                      <label className="block mb-3 text-sm font-semibold">
+                        {field.label}
+                      </label>
+                      <Field
+                        as="select"
+                        data-testid={field.uid}
+                        className="block mb-6 w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
+                      >
+                        {field.options?.map((option: OptionType) => {
+                          return (
+                            <option
+                              className="py-4"
+                              key={option.uid}
+                              value={option.value}
+                            >
+                              {option.label}
+                            </option>
+                          );
+                        })}
+                      </Field>
+                    </div>
                   );
                 case 'checkboxes':
                   return (
@@ -86,6 +95,9 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                       className="mb-8"
                       key={field.uid}
                     >
+                      <label className="block mb-3 text-sm font-semibold">
+                        {field.label}
+                      </label>
                       {field.options?.map((option: OptionType) => {
                         return (
                           <label
@@ -97,6 +109,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                               type="checkbox"
                               name={field.uid}
                               value={option.value}
+                              data-testid={field.uid}
                               id={option.uid}
                               className="mr-4"
                               onChange={(
@@ -124,6 +137,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                         type={field.type}
                         name={field.uid}
                         id={field.uid}
+                        data-testid={field.uid}
                         className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                           fieldChanged(
