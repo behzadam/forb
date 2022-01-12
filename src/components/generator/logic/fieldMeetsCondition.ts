@@ -18,11 +18,11 @@ export const fieldMeetsCondition =
     if (field.logic) {
       const states: boolean[] = field.logic.conditions.reduce(
         (result: boolean[], condition: Conditions) => {
-          // gets target value from form values (by uid key)
+          // get target value from form values (by uid key)
           const target = formValues[condition.when];
           // field value
           const current = condition.value;
-          // generates an array of boolean: [true, false, ...]
+          // generate an array of boolean: [true, false, ...]
           return [
             ...result,
             fieldValueMeetsTarget(condition.is, target, current),
@@ -30,7 +30,7 @@ export const fieldMeetsCondition =
         },
         []
       );
-      // checks if filds meet logic: All, Any
+      // check if filds meet logic: All, Any
       return fieldValuesMeetLogic(field.logic.if, states);
     }
     // show field by default
