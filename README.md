@@ -12,3 +12,5 @@ In my experience and in the large projects it is better to make or use some gene
 The main purpose of Forb is the generator part but Forb has tow parts: Form Generator and Form Builder and at this moment I don't have any plan to release it as a product but I'm not sure about the future.
 
 I'm working and hope to deploy the Form Generator as soon as possible.
+
+The template is from: [Link](https://github.com/ixartz/Next-js-Boilerplate)
