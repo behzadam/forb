@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 
 import { Formik, Field, Form } from 'formik';
 
@@ -14,6 +14,10 @@ type FormProps = {
 const FormGenerator = ({ formData }: FormProps): ReactElement => {
   const { fields, formValues, isLoading, fieldChanged, onSubmit } =
     useFormGenerator(formData);
+
+  useEffect(() => {
+    console.log(formValues);
+  }, [formValues]);
 
   if (isLoading) return <Spinner />;
   return (
@@ -76,6 +80,11 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                       <Field
                         as="select"
                         data-testid={field.uid}
+                        id={field.uid}
+                        name={field.uid}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                          fieldChanged(field.uid, e.target.value);
+                        }}
                         className="block mb-6 w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
                       >
                         {field.options?.map((option: OptionType) => {
