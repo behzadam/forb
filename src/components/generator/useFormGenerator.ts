@@ -50,7 +50,7 @@ const useFormGenerator = (formData: any[]) => {
           ...result,
           [field.uid]: getDefaultValue(field),
         };
-      }, {});
+      }, {} as Record<string, any>);
     });
     setIsLoading(false);
   }, [formData]);
