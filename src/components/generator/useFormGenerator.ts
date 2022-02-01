@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { FieldType } from '../../types';
-import { addOrRemove } from '../../utils/addOrRemove';
+import { addOrRemove } from '../../utils/index';
 import { fieldMeetsCondition } from './logic/fieldMeetsCondition';
 
 const getDefaultValue = (field: FieldType): string | string[] => {
