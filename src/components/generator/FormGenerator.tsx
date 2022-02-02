@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect } from 'react';
 
-import { Formik, Field, Form } from 'formik';
+import { Formik, Field, Form, ErrorMessage } from 'formik';
 
 import { FieldType, OptionType } from '../../types';
 import Button from '../ui/Button';
@@ -12,12 +12,22 @@ type FormProps = {
 };
 
 const FormGenerator = ({ formData }: FormProps): ReactElement => {
-  const { fields, formValues, isLoading, fieldChanged, onSubmit } =
-    useFormGenerator(formData);
+  const {
+    fields,
+    formValues,
+    isLoading,
+    validateSchema,
+    fieldChanged,
+    onSubmit,
+  } = useFormGenerator(formData);
 
   useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
+    console.log(validateSchema);
+  }, [validateSchema]);
+
+  const renderError = (message: string) => (
+    <p className="font-mono text-xs text-red-400">{message}</p>
+  );
 
   if (isLoading) return <Spinner />;
   return (
@@ -28,6 +38,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
       <div className="p-6 bg-white border rounded-md shadow-sm border-gray-50">
         <Formik
           initialValues={formValues}
+          validationSchema={validateSchema}
           enableReinitialize={true}
           onSubmit={async (values) => onSubmit(values)}
         >
@@ -162,6 +173,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                           );
                         }}
                       />
+                      <ErrorMessage name={field.uid} render={renderError} />
                     </div>
                   );
               }

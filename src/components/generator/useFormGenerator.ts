@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 
+import * as yup from 'yup';
+
 import { FieldType } from '../../types';
 import { addOrRemove } from '../../utils/index';
+import { generateSchema } from './generateSchema';
 import { fieldMeetsCondition } from './logic/fieldMeetsCondition';
 
 const getDefaultValue = (field: FieldType): string | string[] => {
@@ -25,6 +28,7 @@ const useFormGenerator = (formData: any[]) => {
   const [fields, setFields] = useState<any[]>(formData);
   const [formValues, setFormValues] = useState<Record<string, any>>({});
   const [isLoading, setIsLoading] = useState(true);
+  const [validateSchema, setValidateSchema] = useState({});
 
   const fieldChanged = (uid: string, value: any) => {
     setFormValues(() => {
@@ -53,13 +57,26 @@ const useFormGenerator = (formData: any[]) => {
       }, {} as Record<string, any>);
     });
     setIsLoading(false);
+
+    // set form validation
+    const validationSchema = formData.reduce(generateSchema, {});
+    const validationObject = yup.object().shape(validationSchema);
+    setValidateSchema(validationObject);
+    console.log({ validationSchema, validationObject });
   }, [formData]);
 
   useEffect(() => {
     setFields(formData.filter(fieldMeetsCondition(formValues)));
   }, [formValues]);
 
-  return { fields, formValues, isLoading, fieldChanged, onSubmit };
+  return {
+    fields,
+    formValues,
+    isLoading,
+    validateSchema,
+    fieldChanged,
+    onSubmit,
+  };
 };
 
 export default useFormGenerator;
