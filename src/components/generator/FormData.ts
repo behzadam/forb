@@ -5,6 +5,7 @@ export const formData = [
     name: 'phone',
     uid: 'f61233e8-565e-43d0-9c14-7d7f220c6020',
     value: 1,
+    validationType: 'number',
     validations: [
       ['required', 'this field is required'],
       ['min', 1, 'there should be atleast 1 family member'],
