@@ -10,7 +10,7 @@ type Config = {
 
 type Schema = { [uid: string]: any };
 
-export function generateSchema(schema: Schema, { uid, validation }: Config) {
+export function generateSchema1(schema: Schema, { uid, validation }: Config) {
   if (!validation?.type) return schema;
   let validator: { [type: string]: any } = (yup as any)[validation.type]();
   validation.conditions.forEach((condition) => {
