@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect } from 'react';
+import React, { ReactElement } from 'react';
 
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 
@@ -21,9 +21,9 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
     onSubmit,
   } = useFormGenerator(formData);
 
-  useEffect(() => {
-    console.log(validateSchema);
-  }, [validateSchema]);
+  // useEffect(() => {
+  //   console.log(validateSchema, formValues);
+  // }, [validateSchema, formValues]);
 
   const renderError = (message: string) => (
     <p className="font-mono text-xs text-red-400">{message}</p>
@@ -73,7 +73,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
                               ) => {
-                                fieldChanged(field.uid, e.target.value);
+                                fieldChanged(field, e.target.value);
                               }}
                             />
                             {option.label}
@@ -94,7 +94,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                         id={field.uid}
                         name={field.uid}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                          fieldChanged(field.uid, e.target.value);
+                          fieldChanged(field, e.target.value);
                         }}
                         className="block mb-6 w-full p-2.5 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
                       >
@@ -140,7 +140,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                               onChange={(
                                 e: React.ChangeEvent<HTMLInputElement>
                               ) => {
-                                fieldChanged(field.uid, e.target.value);
+                                fieldChanged(field, e.target.value);
                               }}
                             />
                             {option.label}
@@ -165,12 +165,7 @@ const FormGenerator = ({ formData }: FormProps): ReactElement => {
                         data-testid={field.uid}
                         className="text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                          fieldChanged(
-                            field.uid,
-                            field.type === 'number'
-                              ? Number(e.target.value)
-                              : e.target.value
-                          );
+                          fieldChanged(field, e.target.value);
                         }}
                       />
                       <ErrorMessage name={field.uid} render={renderError} />
