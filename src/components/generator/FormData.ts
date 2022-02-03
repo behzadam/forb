@@ -107,7 +107,7 @@ export const formData = [
     type: 'text',
     name: 'name 2',
     uid: 'ii90f44a-d479-49ae-ad66-c2c475daa66b',
-    value: null,
+    value: '',
     logic: {
       if: 'Any',
       conditions: [
