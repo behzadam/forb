@@ -4,13 +4,15 @@
 
 Recently I read [this article](https://www.aaron-powell.com/posts/2020-12-10-dynamic-forms-with-react-hooks/) and decided to develop it as a full project and called it Forb.
 
-In my experience and in the large projects it is better to make or use some generators instead of coding and managing many components, for example:
-- JSON based form generator
-- Just one dialog with dynamic component loading inside 
-- JSON based table generator
+Forb has tow parts Form Generator and Form Builder and is used [Formik](https://formik.org/) and [Yup](https://github.com/jquense/yup) as form validation.
 
-The main purpose of Forb is the generator part but Forb has tow parts: Form Generator and Form Builder and at this moment I don't have any plan to release it as a product but I'm not sure about the future.
+### Form Generator
+Generates JSON based form elements with conditions:
+- input: text, number
+- radio button group
+- checkboxes
 
-I'm working and hope to deploy the Form Generator as soon as possible.
+Form validation:
+- generates field validation based on JSON and yup generator.
 
 The template is from: [Link](https://github.com/ixartz/Next-js-Boilerplate)
