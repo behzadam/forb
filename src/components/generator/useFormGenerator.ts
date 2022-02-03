@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import * as yup from 'yup';
 
 import { FieldType } from '../../types';
-import { addOrRemove } from '../../utils/index';
+import { addOrRemove } from '../../utils';
 import { generateSchema } from './generateSchema';
 import { fieldMeetsCondition } from './logic/fieldMeetsCondition';
 
@@ -11,7 +11,7 @@ const getDefaultValue = (field: FieldType): string | string[] => {
   // for: checkboxes
   const defaultSelectedList: string[] = [];
   // for: input, select, options
-  let defaultSelected = field.value ?? null;
+  let defaultSelected = field.value ?? '';
   field?.options?.forEach((option) => {
     if (option.checked) {
       if (field.type === 'checkboxes') {
@@ -21,6 +21,7 @@ const getDefaultValue = (field: FieldType): string | string[] => {
       }
     }
   });
+  console.log('defaultSelected', defaultSelected);
   return defaultSelected || defaultSelectedList;
 };
 
@@ -30,15 +31,15 @@ const useFormGenerator = (formData: any[]) => {
   const [isLoading, setIsLoading] = useState(true);
   const [validateSchema, setValidateSchema] = useState({});
 
-  const fieldChanged = (uid: string, value: any) => {
+  const fieldChanged = (field: FieldType, newValue: any) => {
     setFormValues(() => {
-      if (Array.isArray(formValues[uid])) {
+      if (field.type === 'checkboxes') {
         return {
           ...formValues,
-          [uid]: addOrRemove(formValues[uid], value),
+          [field.uid]: addOrRemove(formValues[field.uid], newValue),
         };
       }
-      return { ...formValues, [uid]: value };
+      return { ...formValues, [field.uid]: newValue };
     });
   };
 
