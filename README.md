@@ -4,7 +4,7 @@
 
 Recently I read [this article](https://www.aaron-powell.com/posts/2020-12-10-dynamic-forms-with-react-hooks/) and decided to develop it as a full project and called it Forb.
 
-Forb has tow parts Form Generator and Form Builder and is used [Formik](https://formik.org/) and [Yup](https://github.com/jquense/yup) as form validation.
+Forb has two parts Form Generator and Form Builder and is used [Formik](https://formik.org/) and [Yup](https://github.com/jquense/yup) as form validation.
 
 ### Form Generator
 Generates JSON based form elements with conditions:
