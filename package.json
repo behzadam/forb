@@ -3,7 +3,7 @@
   "scripts": {
     "build": "rollup --config rollup.config.js && tsc -b",
     "dev": "yarn watch",
-    "watch": "concurrently --kill-others \"rollup --config rollup.config.js -w\" \"tsc -b --watch\" \"yarn test\""
+    "watch": "concurrently --kill-others \"rollup --config rollup.config.js -w\" \"tsc -b --watch\""
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -20,6 +20,7 @@
     "rollup-plugin-size": "^0.2.2",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-visualizer": "^5.6.0",
+    "ts-node": "^10.7.0",
     "typescript": "^4.6.3"
   }
 }
