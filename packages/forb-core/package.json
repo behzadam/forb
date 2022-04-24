@@ -1,0 +1,32 @@
+{
+  "name": "forb-core",
+  "version": "0.0.0",
+  "description": "Forb is a conditional form builder library.",
+  "author": "Behzad Ali Mohammad Zad <behzad.am@gmail.com>",
+  "homepage": "https://github.com/behzadam/forb#readme",
+  "license": "ISC",
+  "main": "lib/forb-core.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "keywords": [
+    "forb",
+    "form builder",
+    "form generator",
+    "react form"
+  ],
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/behzadam/forb.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/behzadam/forb/issues"
+  }
+}
