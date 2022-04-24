@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { FieldType } from "../../src/types";
 import { addOrRemove } from "../../src/utils";
 import { generateSchema } from "../../src/components/generator/generateSchema";
-import { fieldMeetsCondition } from "../forb-core/logic/fieldMeetsCondition";
+import { fieldMeetsCondition } from "../forb-core/lib/logic/fieldMeetsCondition";
 
 const getDefaultValue = (field: FieldType): string | string[] => {
   // for: checkboxes
