@@ -5,11 +5,12 @@
   "author": "Behzad Ali Mohammad Zad <behzad.am@gmail.com>",
   "homepage": "https://github.com/behzadam/forb#readme",
   "license": "ISC",
-  "main": "lib/forb-core.js",
-  "typings": "lib/forb-core.d.ts",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+  "module": "build/esm/index.js",
+  "main": "build/cjs/index.js",
+  "browser": "build/umd/index.production.min.js",
+  "types": "build/types/index.d.ts",
+  "engines": {
+    "node": ">=12"
   },
   "keywords": [
     "forb",
@@ -18,7 +19,8 @@
     "react form"
   ],
   "files": [
-    "lib"
+    "build",
+    "src"
   ],
   "publishConfig": {
     "access": "public"
