@@ -1,5 +1,4 @@
 {
-  "name": "forb",
   "private": true,
   "devDependencies": {
     "@types/node": "^17.0.25",
