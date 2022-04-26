@@ -1,4 +1,4 @@
-import { ConditionsType } from '../types'
+import { ConditionsType } from './types'
 import {
   isContains,
   isEmpty,
@@ -7,7 +7,7 @@ import {
   isGreaterThanOrEquals,
   isLessThan,
   isLessThanOrEquals,
-} from '../utils/index'
+} from './utils/index'
 
 export function fieldValueMeetsTarget(operator: string, target: any): boolean
 export function fieldValueMeetsTarget(
