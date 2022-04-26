@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@forb/forb-core": ["packages/forb-core"]
+      "@forb/core": ["packages/forb-core"]
     }
   }
 }
