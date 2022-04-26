@@ -1,4 +1,4 @@
-import { ConditionsType } from "../../../src/types";
+import { ConditionsType } from '../types/index'
 import {
   isContains,
   isEmpty,
@@ -7,14 +7,14 @@ import {
   isGreaterThanOrEquals,
   isLessThan,
   isLessThanOrEquals,
-} from "../../../src/utils/index";
+} from '../utils/index'
 
-export function fieldValueMeetsTarget(operator: string, target: any): boolean;
+export function fieldValueMeetsTarget(operator: string, target: any): boolean
 export function fieldValueMeetsTarget(
   operator: string,
   target: any,
   other: any
-): boolean;
+): boolean
 
 export function fieldValueMeetsTarget(
   operator: string,
@@ -36,9 +36,9 @@ export function fieldValueMeetsTarget(
       [ConditionsType.LessThan]: (): boolean => isLessThan(target, other),
       [ConditionsType.LessThanOrEquals]: (): boolean =>
         isLessThanOrEquals(target, other),
-    };
-    return operations[operator]?.(target, other) ?? false;
+    }
+    return operations[operator]?.(target, other) ?? false
   } catch (error) {
-    return false;
+    return false
   }
 }
