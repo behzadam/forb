@@ -1,4 +1,4 @@
-import { ConditionsType } from '../types/index'
+import { ConditionsType } from '../types'
 import {
   isContains,
   isEmpty,
