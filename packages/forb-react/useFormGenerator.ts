@@ -1,3 +1,4 @@
+/*
 import { useState, useEffect } from "react";
 
 import * as yup from "yup";
@@ -81,3 +82,5 @@ const useFormGenerator = (formData: any[]) => {
 };
 
 export default useFormGenerator;
+
+*/
