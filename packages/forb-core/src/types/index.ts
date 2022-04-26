@@ -1,4 +1,3 @@
-export * from './fields'
 export enum ConditionsType {
   // shared
   EqualTo = 'EqualTo',
