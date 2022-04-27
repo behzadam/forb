@@ -9,14 +9,14 @@ import {
   isLessThanOrEquals,
 } from './utils/index'
 
-export function fieldValueMeetsTarget(operator: string, target: any): boolean
-export function fieldValueMeetsTarget(
+export function fieldMeetsTarget(operator: string, target: any): boolean
+export function fieldMeetsTarget(
   operator: string,
   target: any,
   other: any
 ): boolean
 
-export function fieldValueMeetsTarget(
+export function fieldMeetsTarget(
   operator: string,
   target: any,
   other?: any
