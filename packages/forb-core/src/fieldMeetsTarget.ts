@@ -1,4 +1,4 @@
-import { ConditionsType } from './types'
+import types { If, ConditionType } from './types'
 import {
   isContains,
   isEmpty,
@@ -23,18 +23,18 @@ export function fieldMeetsTarget(
 ): boolean {
   try {
     const operations: Record<string, Function> = {
-      [ConditionsType.IsEmpty]: (): boolean => isEmpty(target),
-      [ConditionsType.IsNotEmpty]: (): boolean => !isEmpty(target),
-      [ConditionsType.Contains]: (): boolean => isContains(target, other),
-      [ConditionsType.IsNotContaining]: (): boolean =>
+      [ConditionType.IsEmpty]: (): boolean => isEmpty(target),
+      [ConditionType.IsNotEmpty]: (): boolean => !isEmpty(target),
+      [ConditionType.Contains]: (): boolean => isContains(target, other),
+      [ConditionType.IsNotContaining]: (): boolean =>
         !isContains(target, other),
-      [ConditionsType.EqualTo]: (): boolean => isEquals(target, other),
-      [ConditionsType.NotEqualTo]: (): boolean => !isEquals(target, other),
-      [ConditionsType.GreaterThan]: (): boolean => isGreaterThan(target, other),
-      [ConditionsType.GreaterThanOrEquals]: (): boolean =>
+      [ConditionType.EqualTo]: (): boolean => isEquals(target, other),
+      [ConditionType.NotEqualTo]: (): boolean => !isEquals(target, other),
+      [ConditionType.GreaterThan]: (): boolean => isGreaterThan(target, other),
+      [ConditionType.GreaterThanOrEquals]: (): boolean =>
         isGreaterThanOrEquals(target, other),
-      [ConditionsType.LessThan]: (): boolean => isLessThan(target, other),
-      [ConditionsType.LessThanOrEquals]: (): boolean =>
+      [ConditionType.LessThan]: (): boolean => isLessThan(target, other),
+      [ConditionType.LessThanOrEquals]: (): boolean =>
         isLessThanOrEquals(target, other),
     }
     return operations[operator]?.(target, other) ?? false
