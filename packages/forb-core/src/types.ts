@@ -1,36 +1,35 @@
-export enum ConditionsType {
-  // shared
-  EqualTo = 'EqualTo',
-  NotEqualTo = 'NotEqualTo',
+export type Condition =
+  | 'EqualTo'
+  | 'NotEqualTo'
+  | 'NotEqualTo'
+  | 'IsNotContaining'
+  | 'Contains'
+  | 'IsEmpty'
+  | 'IsNotEmpty'
+  | 'GreaterThan'
+  | 'GreaterThanOrEquals'
+  | 'LessThan'
+  | 'LessThanOrEquals'
 
-  // text fields
-  IsNotContaining = 'IsNotContaining',
-  Contains = 'Contains',
-  IsEmpty = 'IsEmpty',
-  IsNotEmpty = 'IsNotEmpty',
+export type If = 'All' | 'Any'
+export type Then = 'Show' | 'Hide' | 'JumpTo'
 
-  // numeric fields
-  GreaterThan = 'GreaterThan',
-  GreaterThanOrEquals = 'GreaterThanOrEquals',
-  LessThan = 'LessThan',
-  LessThanOrEquals = 'LessThanOrEquals',
-}
+export type FieldValue = number | string | boolean | null | undefined
+
+export type Meet = [
+  condition: Condition,
+  target: FieldValue,
+  other: FieldValue,
+  result: boolean
+]
+
+export type Action = (meet: Meet) => boolean
+export type ActionMap = Record<Condition, Action>
 
 export type Conditions = {
   when: string
   is: string
   value: any
-}
-
-export enum ConditionType {
-  All = 'All',
-  Any = 'Any',
-}
-
-export enum ActionsType {
-  Show = 'Show',
-  Hide = 'Hide',
-  JumpTo = 'JumpTo',
 }
 
 export type FieldValues = Record<string, any>
