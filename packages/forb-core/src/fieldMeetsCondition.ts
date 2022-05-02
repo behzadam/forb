@@ -1,4 +1,4 @@
-import { Conditions, ConditionType, FieldType, FieldValues } from './types'
+import { Conditions, If, FieldType, FieldValues } from './types'
 import { fieldMeetsTarget } from './fieldMeetsTarget'
 
 const fieldMeetsLogic = (logic: string, states: boolean[]): boolean => {
