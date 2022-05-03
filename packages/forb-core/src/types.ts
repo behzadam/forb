@@ -14,17 +14,14 @@ export type Condition =
 export type If = 'All' | 'Any'
 export type Then = 'Show' | 'Hide' | 'JumpTo'
 
-export type FieldValue = number | string | boolean | null | undefined
-
-export type Meet = [
-  condition: Condition,
-  target: FieldValue,
-  other: FieldValue,
-  result: boolean
+export type FieldValue = number | string | boolean | any[] | null | undefined
+export type FieldTargetWithOther = [
+  target: keyof FieldValue,
+  other?: keyof FieldValue
 ]
 
-export type Action = (meet: Meet) => boolean
-export type ActionMap = Record<Condition, Action>
+export type Action<T> = (t: T) => boolean
+export type ActionMap<T> = Record<Condition, Action<T>>
 
 export type Conditions = {
   when: string
