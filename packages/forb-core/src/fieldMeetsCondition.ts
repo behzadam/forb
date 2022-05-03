@@ -1,5 +1,36 @@
-import { Conditions, If, FieldType, FieldValues } from './types'
-import { fieldMeetsTarget } from './fieldMeetsTarget'
+import {
+  Conditions,
+  If,
+  FieldType,
+  FieldValues,
+  FieldTargetWithOther,
+  ActionMap,
+} from './types'
+
+import {
+  isContains,
+  isEmpty,
+  isEquals,
+  isGreaterThan,
+  isGreaterThanOrEquals,
+  isLessThan,
+  isLessThanOrEquals,
+} from './utils/index'
+
+const fieldMeetsTarget: ActionMap<FieldTargetWithOther> = {
+  Contains: ([target, other]): boolean => isContains(target, other),
+  EqualTo: ([target, other]): boolean => isEquals(target, other),
+  GreaterThan: ([target, other]): boolean => isGreaterThan(target, other),
+  GreaterThanOrEquals: ([target, other]): boolean =>
+    isGreaterThanOrEquals(target, other),
+  IsEmpty: (target): boolean => isEmpty(target),
+  IsNotContaining: ([target, other]): boolean => !isContains(target, other),
+  IsNotEmpty: (target): boolean => !isEmpty(target),
+  LessThan: ([target, other]): boolean => isLessThan(target, other),
+  LessThanOrEquals: ([target, other]): boolean =>
+    isLessThanOrEquals(target, other),
+  NotEqualTo: ([target, other]): boolean => !isEquals(target, other),
+}
 
 const fieldMeetsLogic = (logic: string, states: boolean[]): boolean => {
   if (logic === ConditionType.All) return states.every(item => item === true)
