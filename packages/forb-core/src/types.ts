@@ -45,7 +45,7 @@ export type FieldType = {
   value?: any
   condition?: string
   logic?: {
-    if: string
+    if: If
     conditions: Conditions[]
   }
   options?: OptionType[]
