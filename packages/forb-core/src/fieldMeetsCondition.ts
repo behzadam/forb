@@ -32,9 +32,9 @@ const fieldMeetsTarget: ActionMap<FieldTargetWithOther> = {
   NotEqualTo: ([target, other]): boolean => !isEquals(target, other),
 }
 
-const fieldMeetsLogic = (logic: string, states: boolean[]): boolean => {
-  if (logic === ConditionType.All) return states.every(item => item === true)
-  if (logic === ConditionType.Any) return states.some(item => item === true)
+const fieldMeetsLogic = (logic: If, states: boolean[]): boolean => {
+  if (logic === 'All') return states.every(item => item === true)
+  if (logic === 'Any') return states.some(item => item === true)
   return false
 }
 
@@ -49,7 +49,7 @@ export const fieldMeetsCondition =
           // Field value
           const current = condition.value
           // Generate an array of boolean: [true, false, ...]
-          return [...result, fieldMeetsTarget(condition.is, target, current)]
+          return [...result, fieldMeetsTarget[condition.is](target, current)]
         },
         []
       )
