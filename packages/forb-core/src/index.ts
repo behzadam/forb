@@ -1,5 +1,2 @@
-const print = () => {
-  console.log('print')
-}
-
-export default print
+import { fieldMeetsCondition } from './fieldMeetsCondition'
+export default fieldMeetsCondition
