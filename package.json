@@ -9,7 +9,8 @@
     "prettier": "prettier \"packages/*/src/**.{md,js,jsx,ts,tsx,json}\" --write"
   },
   "workspaces": [
-    "./packages/forb-core"
+    "./packages/forb-core",
+    "./packages/forb-react"
   ],
   "devDependencies": {
     "@babel/cli": "^7.17.6",
