@@ -45,11 +45,14 @@ export const fieldMeetsCondition =
       const states: boolean[] = field.logic.conditions.reduce(
         (result: boolean[], condition: Conditions) => {
           // Get target value from form values (by uid key)
-          const target = formValues[condition.when]
+          const targetValue = formValues[condition.when]
           // Field value
-          const current = condition.value
+          const fieldValue = condition.value
           // Generate an array of boolean: [true, false, ...]
-          return [...result, fieldMeetsTarget[condition.is](target, current)]
+          return [
+            ...result,
+            fieldMeetsTarget[condition.is](targetValue, fieldValue),
+          ]
         },
         []
       )
