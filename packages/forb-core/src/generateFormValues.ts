@@ -1,6 +1,6 @@
 import { FieldType } from './types'
 
-export const getDefaultValue = (field: FieldType): string | string[] => {
+export const getDefaultValues = (field: FieldType): string | string[] => {
   // for: checkboxes
   const defaultSelectedList: string[] = []
   // for: input, select, options
@@ -15,4 +15,13 @@ export const getDefaultValue = (field: FieldType): string | string[] => {
     }
   })
   return defaultSelected || defaultSelectedList
+}
+
+export function generateFormValues(fields: any[]): Record<string, any> {
+  return fields.reduce((result, field: FieldType) => {
+    return {
+      ...result,
+      [field.uid]: getDefaultValues(field),
+    }
+  }, {} as Record<string, any>)
 }
