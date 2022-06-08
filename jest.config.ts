@@ -17,7 +17,7 @@ const config: Config.InitialOptions = {
     ...packages.reduce(
       (acc, name) => ({
         ...acc,
-        [`@ahoopen/${name}(.*)$`]: `<rootDir>/packages/./${name}/src/$1`,
+        [`@forb-/${name}(.*)$`]: `<rootDir>/packages/./${name}/src/$1`,
       }),
       {}
     ),
