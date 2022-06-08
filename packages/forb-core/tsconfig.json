@@ -2,8 +2,10 @@
   "composite": true,
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./build/ts"
+    "outDir": "./build/ts",
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "include": ["src"],
+  "include": ["src", "__tests__/index.test.ts"],
   "files": ["src/index.ts"]
 }
